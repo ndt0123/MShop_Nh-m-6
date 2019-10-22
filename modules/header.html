@@ -8,74 +8,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../style/style.css">
 	<script type="text/javascript" src="../script/script.js"></script>
-	<style type="text/css">
-		.box-header {
-			margin-bottom: 0px;
-		}
-		.box-header .header a.float-right {
-			text-decoration: none;
-			color: white;
-			text-align: center;
-			height: 44px;
-		}
-		.box-header .header {
-			padding-top: 8px;
-			padding-bottom: 8px;
-		}
-		.box-header {
-			background-color: #4CAF50;
-			border-radius: 0px;
-		}
-		#shopping-cart-for-small-screen {
-			display: none;
-		}
-		.box-header .header form input, button {
-			height: 44px;
-			border: none;
-		}
-		.box-header .header form div input {
-			border-radius: 3px 0px 0px 3px;
-			border-right: 0px;
-
-		}
-		.box-header .header form div button {
-			border-radius: 0px 3px 3px 0px;
-			background-color: #DBD521;
-		}
-		.box-header .header #shopping-cart-for-small-screen span {
-			font-size: 20px;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-
-		@media screen and (max-width:768px) {
-			/* ----- Phần header ----- */
-			#shopping-cart-for-small-screen {
-				display: block;
-			}
-			#shopping-cart-for-large-screen {
-				display: none;
-			}
-			.box-header .header form {
-				padding-top: 8px;
-			}
-		}
-	</style>
+	
 </head>
 <body>
 	<!------------ Header --------------->
 	<nav class="navbar navbar-default box-header">
 		<div class="container header">
-			<a href="#" class="col-lg-3 col-md-3 col-sm-4 col-xs-6" style="padding-left: 0px;">
+			<a href="index.html" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 				<img src="../images/demo_logo.png" id="logo">
 			</a>
 
 			<!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình nhỏ -->
 			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-small-screen">
-				<a href="#" class="float-right" style="padding-left: 15px;" title="Giỏ hàng">
+				<a href="gioHang.html" class="float-right" style="padding-left: 15px;" title="Giỏ hàng">
 		        	<span class="glyphicon glyphicon-shopping-cart"></span>
 		        </a>
-		        <a href="#" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+		        <a href="dangNhap.html" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
 		        	<span class="glyphicon glyphicon-user"></span> 
 		        </a>
 			</div>
@@ -89,12 +37,12 @@
 
 			<!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình lớn -->
 			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style="padding-right: 0px;">
-				<a href="#" class="float-right" style="padding-left: 15px;" title="Giỏ hàng">
+				<a href="gioHang.html" class="float-right" style="padding-right: 15px;" title="Giỏ hàng">
 		        	<span class="glyphicon glyphicon-shopping-cart"></span> 
 		        	<br>
 		        	Giỏ hàng
 		        </a>
-		        <a href="#" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+		        <a href="dangNhap.html" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
 		        	<span class="glyphicon glyphicon-user"></span> 
 		        	<br>
 		        	Đăng nhập

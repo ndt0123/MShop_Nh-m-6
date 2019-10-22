@@ -1,115 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../style/style.css">
-	<script type="text/javascript" src="../script/script.js"></script>
-	<style type="text/css">
-		.accessories-products .accessories-types, .filter, .box-products {
-			background-color: white;
-			border-radius: 3px;
-		}
-		.accessories-products .accessories-types a img {
-			padding: 0px;
-		}
-		.accessories-products .accessories-types a p {
-			padding: 0px;
-			text-align: center;
-			color: black;
-		}		.accessories-products .accessories-types .row a p:hover {
-			color: blue;
-		}
-	</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+  $(".prds").mouseover(function(){
+    $(this).animate({
+    	borderRadius: '10px',
+    	backgroundColor: 'red',
+    	boxShadow: '0px 0px 10px 0px #a7a7a7'
+
+    }, "slow");
+  });
+});
+</script> 
 </head>
 <body>
-	<div class="container accessories-products phone-products">
-		<div class="accessories-types col-xs-12">
-			<div class="col-sm-1 col-xs-2">
-					<a href="" title="Bao da ốp lưng">
-						<img src="../images/accessories_img/oplungdt.png" class="col-xs-12">
-						<p class="col-xs-12">Bao da ốp lưng</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Sạc dự phòng">
-						<img src="../images/accessories_img/pinsac.png" class="col-xs-12">
-						<p class="col-xs-12">Sạc dự phòng</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Thẻ nhớ">
-						<img src="../images/accessories_img/thenho.png" class="col-xs-12">
-						<p class="col-xs-12">Thẻ nhớ</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Gậy selfie">
-						<img src="../images/accessories_img/gay_selfie.png" class="col-xs-12">
-						<p class="col-xs-12">Gậy selfie</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Dán màn hình">
-						<img src="../images/accessories_img/miengdan_manhinh.png" class="col-xs-12">
-						<p class="col-xs-12">Dán màn hình</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Tai nghe">
-						<img src="../images/accessories_img/tainghe.png" class="col-xs-12">
-						<p class="col-xs-12">Tai nghe</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Loa">
-						<img src="../images/accessories_img/loa.png" class="col-xs-12">
-						<p class="col-xs-12">Loa</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="USB - Ổ cứng">
-						<img src="../images/accessories_img/usb_ocung.png" class="col-xs-12">
-						<p class="col-xs-12">USB - Ổ cứng</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Sạc cáp">
-						<img src="../images/accessories_img/capsac.png" class="col-xs-12">
-						<p class="col-xs-12">Sạc cáp</p>
-					</a>
-				</div>
-				<div class="col-sm-1 col-xs-2">
-					<a href="" title="Chuột">
-						<img src="../images/accessories_img/chuot.png" class="col-xs-12">
-						<p class="col-xs-12">Chuột</p>
-					</a>
-				</div>
-		</div>
 
-	</div>
+<button>Start Animation</button>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<img src="../images/phone.png">
-			</div>
-			<div class="col-lg-6">
-				<img src="../images/phone1_big_img.jpg">
-			</div>
-			<div class="col-lg-6">
-				<img src="../images/phone1_small_img.jpg">
-			</div>
-			<div class="col-lg-6">
-				<img src="../images/slide_show_img_1.png">
-			</div>
-			<div class="col-lg-6">
-				<img src="../images/accessories_img/capsac.png">
-			</div>
-		</div>
-	</div>
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div class="prds" style="background:#98bf21;height:100px;width:100px;position:absolute; margin: 20px;"></div>
+
+<div class="prds" style="background:#98bf21;height:100px;width:100px;position:absolute; margin: 20px; top: 300px; left: 500px;"></div>
 </body>
 </html>
