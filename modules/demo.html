@@ -1,28 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script> 
-$(document).ready(function(){
-  $(".prds").mouseover(function(){
-    $(this).animate({
-    	borderRadius: '10px',
-    	backgroundColor: 'red',
-    	boxShadow: '0px 0px 10px 0px #a7a7a7'
-
-    }, "slow");
-  });
-});
-</script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script> 
+		var myFirstObject = {
+		    firstName: ["1", "2", "3"],
+		    favoriteAuthor: "Conrad"
+		};
+		console.log(myFirstObject["firstName"]);
+		console.log(myFirstObject["firstName"][0]);
+		console.log(myFirstObject["firstName"].length);
+	</script> 
 </head>
 <body>
-
-<button>Start Animation</button>
-
-<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
-
-<div class="prds" style="background:#98bf21;height:100px;width:100px;position:absolute; margin: 20px;"></div>
-
-<div class="prds" style="background:#98bf21;height:100px;width:100px;position:absolute; margin: 20px; top: 300px; left: 500px;"></div>
 </body>
 </html>

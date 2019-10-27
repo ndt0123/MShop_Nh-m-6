@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Thanh toán mua hàng</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../style/style.css">
+	<script type="text/javascript" src="../script/script.js"></script>
+
+</head>
+<body>
+	<!------------ Header --------------->
+	<nav class="navbar navbar-default box-header">
+		<div class="container header">
+			<a href="index.html" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+				<img src="../images/demo_logo.png" id="logo">
+			</a>
+
+			<!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình nhỏ -->
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-small-screen">
+				<a href="gioHang.html" class="float-right" style="padding-left: 15px;" title="Giỏ hàng">
+					<span class="glyphicon glyphicon-shopping-cart"></span>
+				</a>
+				<a href="dangNhap.html" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+					<span class="glyphicon glyphicon-user"></span> 
+				</a>
+			</div>
+			
+			<form class="col-lg-7 col-md-6 col-sm-5 col-xs-12">
+				<div>
+					<input type="text" name="" placeholder="Nhập tên điện thoại, phụ kiện cần tìm" class="float-left col-md-10 col-sm-9 col-xs-10">
+					<button class="float-left col-md-2 col-sm-3 col-xs-2">Tìm kiếm</button>
+				</div>
+			</form>
+
+			<!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình lớn -->
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style="padding-right: 0px;">
+				<a href="gioHang.html" class="float-right" style="padding-right: 15px;" title="Giỏ hàng">
+					<span class="glyphicon glyphicon-shopping-cart"></span> 
+					<br>
+					Giỏ hàng
+				</a>
+				<a href="dangNhap.html" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+					<span class="glyphicon glyphicon-user"></span> 
+					<br>
+					Đăng nhập
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<!---------- Menu ---------->
+	<nav class="navbar navbar-default box-menu">
+		<div class="container menu">
+			<div class="float-left" id="phone-menu-div-button">
+				<a href="dienThoai.html" class="menu-button">
+					<span class="glyphicon glyphicon-phone"></span>
+					<b>ĐIỆN THOẠI</b>
+				</a>
+			</div>
+			<div class="float-left" id="accessories-div-menu-button">
+				<a href="phuKien.html" class="menu-button">
+					<span class="glyphicon glyphicon-headphones"></span>
+					<b>PHỤ KIỆN</b>
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container box-menu-option" style="position: relative;">
+		<div class="menu-option" id="box-option-for-phone-btn" style="position: absolute;">
+			<div class="left-div col-sm-6 col-xs-5">
+				<b class="col-xs-12">HÃNG SẢN XUẤT</b>
+				<ul class="col-xs-12">
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Iphone">Iphone</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Samsung">Samsung</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="OPPO">OPPO</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Huawei">Huawei</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Xiaomi">Xiaomi</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="VSmart">VSmart</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Nokia">Nokia</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="HONOR">HONOR</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Vivo">Vivo</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Realme">Realme</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Asus">Asus</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Wiko">Wiko</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Mobell">Mobell</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="BlackBerry">BlackBerry</a>
+					</li>
+					<li class="col-sm-4 col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Mobiistar">Mobiistar</a>
+					</li>
+				</ul>
+			</div>
+			<div class="middle-div col-sm-2 col-xs-3">
+				<b class="col-xs-12">MỨC GIÁ</b>
+				<ul class="col-xs-12">
+					<li class="col-xs-12">
+						<a href="ketQuaTimKiem.html" title="Dưới 1 triệu">Dưới 1 triệu</a>
+					</li>
+					<li class="col-xs-12">
+						<a href="ketQuaTimKiem.html" title="Từ 1 - 3 triệu">Từ 1 - 3 triệu</a>
+					</li>
+					<li class="col-xs-12">
+						<a href="ketQuaTimKiem.html" title="Từ 3 - 6 triệu">Từ 3 - 6 triệu</a>
+					</li>
+					<li class="col-xs-12">
+						<a href="ketQuaTimKiem.html" title="Từ 6 - 10 triệu">Từ 6 - 10 triệu</a>
+					</li>
+					<li class="col-xs-12">
+						<a href="ketQuaTimKiem.html" title="Từ 10 - 15 triệu">Từ 10 - 15 triệu</a>
+					</li>
+					<li class="col-xs-12">
+						<a href="ketQuaTimKiem.html" title="Trên 15 triệu">Trên 15 triệu</a>
+					</li>
+				</ul>
+			</div>
+			<div class="right-div col-sm-4 col-xs-4">
+				<b class="col-xs-12">BÁN CHẠY NHẤT</b>
+				<div class="col-xs-12 best-seller" style="margin-bottom: 8px;">
+					<a href="chiTietSanPham.html" class="float-left">
+						<img src="../images/phone.png">
+					</a>
+					<span class="float-left">
+						<a href="chiTietSanPham.html">Iphone 11 Pro Max</a>
+						<br>
+						<b>50.000.000đ</b>
+					</span>
+				</div>
+				<div class="col-xs-12 best-seller">
+					<a href="chiTietSanPham.html" class="float-left">
+						<img src="../images/phone.png">
+					</a>
+					<span class="float-left">
+						<a href="chiTietSanPham.html">Iphone 11 Pro Max</a>
+						<br>
+						<b>50.000.000đ</b>
+					</span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="menu-option" id="box-option-for-accessories-btn" style="position: absolute;">
+			<div class="col-xs-6 left-div">
+				<b class="col-xs-12">SẢN PHẨM PHỤ KIỆN</b>
+				<ul class="col-xs-12">
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Bao da ốp lưng">Bao da ốp lưng</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Sạc dự phòng">Sạc dự phòng</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Thẻ nhớ">Thẻ nhớ</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Gậy selfie">Gậy selfie</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Dán màn hình">Dán màn hình</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Tai nghe">Tai nghe</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Loa">Loa</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="USB - Ổ cứng">USB - Ổ cứng</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Sạc cáp">Sạc cáp</a>
+					</li>
+					<li class="col-xs-6">
+						<a href="ketQuaTimKiem.html" title="Chuột">Chuột</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col-xs-6 right-div">
+				<b class="col-xs-12">BÁN CHẠY NHẤT</b>
+				<div class="col-xs-12 best-seller" style="margin-bottom: 8px;">
+					<a href="chiTietSanPham.html" class="float-left">
+						<img src="../images/phu_kien.jpg">
+					</a>
+					<span class="float-left">
+						<a href="chiTietSanPham.html">Combo Loa Bluetooth Karaoke i.value F12-65N</a>
+						<br>
+						<b>1.000.000đ</b>
+					</span>
+				</div>
+				<div class="col-xs-12 best-seller">
+					<a href="chiTietSanPham.html" class="float-left">
+						<img src="../images/phu_kien.jpg">
+					</a>
+					<span class="float-left">
+						<a href="chiTietSanPham.html">Tai nghe có dây choàng đầu i.value T-127 black</a>
+						<br>
+						<b>3.000.000đ</b>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!----- Thanh toán mua hàng ----->
+	<div class="payment-box container">
+		<form onsubmit = "return paymentSubmit()">
+			<!-- Header title -->
+			<div class="col-xs-12 header-title">
+				<h4>Thanh toán mua hàng</h4>
+			</div>
+
+			<!-- Thông tin sản phẩm -->
+			<div class="col-xs-12 payment-products">
+				<!-- Các sản phẩm -->
+				<div class="col-xs-12 detail" style="padding: 0px;">
+					<div class="col-xs-3 img">
+						<img class="col-xs-12" src="../images/phone.png" style="padding: 0px;">
+						<p class="col-xs-12" style="color: #b10000; text-align: center; cursor: pointer; margin: 15px 0px;">Xóa</p>
+					</div>
+
+					<div class="col-xs-9 prd-info">
+						<div class="col-xs-12 info">
+							<b class="float-left">Điện thoại Realme 5 (4GB/128GB)</b>
+							<b class="float-right" style="color: #b10000;">5.000.000 đ</b>
+						</div>
+						<div class="col-xs-12 info">
+							<p class="col-xs-4">Hệ điều hành: </p> <span class="col-xs-8">Android</span>
+							<p class="col-xs-4">Ram: </p> <span class="col-xs-8">6 GB</span>
+							<p class="col-xs-4">Bộ nhớ trong: </p> <span class="col-xs-8">128 GB</span>
+							<p class="col-xs-4">Dung lượng pin: </p> <span class="col-xs-8">4000 mAh</span>
+							<p class="col-xs-4">Màn hình: </p> <span class="col-xs-8">LTPS LCD, 6.5'',Full HD+</span>
+							<p class="col-xs-4">Camera sau: </p> <span class="col-xs-8">Chính 48 MP & Phụ 5 MP</span>
+							<p class="col-xs-4">Camera trước: </p> <span class="col-xs-8">16 MP</span>
+							<p class="col-xs-4">Thẻ SIM: </p> <span class="col-xs-8">2 SIM Nano (SIM 2 chung khe thẻ nhớ), Hỗ trợ 4G</span>
+						</div>
+						<div class="col-xs-12 color-and-amount" style="padding: 10px 0px;">
+							<div class="col-xs-6 color" style="padding: 0px; margin: 1px 0px;">
+								<select name="color">
+									<option value="Xanh dương">Xanh dương</option>
+									<option value="Đen">Đen</option>
+									<option value="Vàng đồng">Vàng đồng</option>
+								</select>
+							</div>
+							<div class="col-xs-6 amount" style="padding: 0px;">
+								<div class="float-right" id="plus-prd-btn"><span class="fa fa-plus"></span></div>
+								<div class="float-right" id="prd-amount" style="border-left: 0px; border-right: 0px; width: 36px; text-align: center;">1</div>
+								<div class="float-right" id="minus-prd-btn"><span class="fa fa-minus"></span></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Tổng tiền -->
+				<div class="col-xs-12 total-payment" style="border-top: solid 1px #f0f0f0; padding: 15px 0px;">
+					<b class="float-left">Tổng tiền thanh toán:</b>
+					<b class="float-right" style="color: #b10000;">5.000.000 đ</b>
+				</div>
+			</div>
+
+			<div class="col-xs-12 customer-info">
+
+				<div class="col-xs-6">
+					<input type="text" name="" class="col-xs-12 user-info" placeholder="Họ và tên" id="name-info">
+					<p class="col-xs-12 error-input-info" id="name-error">Quý khách cần điền họ và tên</p>
+				</div>
+				<div class="col-xs-6">
+					<input type="tel" name="" class="col-xs-12 user-info" placeholder="Số điện thoại" id="phone-number-info" pattern="[0-9]{10}">
+					<p class="col-xs-12 error-input-info" id="phone-number-error" >Quý khách cần điền số điện thoại</p>
+				</div>
+				<div class="col-xs-12">
+					<input type="email" name="" class="col-xs-12 user-info" placeholder="Email (không bắt buộc)">
+				</div>
+
+				<div class="col-xs-6">
+					<div class="col-xs-12 user-info add-info" id="city-choosen">
+						<span class="float-left" id="city-add">Hà Nội</span>
+						<span class="fa fa-caret-down float-right"></span>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="col-xs-12 user-info add-info" id="district-choosen">
+						<span class="float-left" id="district-add">Chọn quận/huyện</span>
+						<span class="fa fa-caret-down float-right"></span>
+					</div>
+					<p class="col-xs-12 error-input-info" id="district-error">Quý khách vui lòng chọn quận/huyện</p>
+				</div>
+
+				<!-- Khung hiển thị chọn tỉnh thành phố, quận huyện -->
+				<div class="col-xs-12">
+					<div class="col-sm-6 col-xs-8 user-info add-info" id="city-list">
+
+					</div>
+					<div class="col-sm-6 col-xs-8 user-info add-info" id="district-list" style="right: 15px;">
+						
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<input type="text" name="" class="col-xs-12 user-info" placeholder="Nhập số nhà, tên đường, phường/xã" id="home-number-info">
+					<p class="col-xs-12 error-input-info" id="home-number-error">Quý khách vui lòng nhập số nhà, tên đường, phường/xã</p>
+				</div>
+				<div class="col-xs-12" style="color: #fb6e2e; margin: 10px 0px;">
+					<b>Chú ý:</b>
+					<span>Bạn vui lòng nhập chính xác các thông tin ở trên để chúng tôi có thể phục vụ bạn tốt nhất.</span>
+				</div>
+
+				<div class="col-xs-12 pay-area" style="margin: 10px 0px;">
+					
+					<div class="col-xs-6" style="padding-left: 0px;">
+						<button class="col-xs-12" style="background-color: #4caf50;">THANH TOÁN KHI NHẬN HÀNG</button>
+					</div>
+					<div class="col-xs-6" style="padding-right: 0px;">
+						<button class="col-xs-12" style="background-color: #dbd521;">THANH TOÁN ONLINE</button>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+	<!---------- Footer ---------->
+	<div class="contriner-fluid box-footer">
+		<div class="container footer">
+			<div class="col-xs-12">
+				<h3 class="col-xs-12">Thông tin liên hệ</h3>
+				<p class="col-xs-12">
+					Nhóm 6 - INT3306 4
+					<br>Điện thoại: 
+					<br>Email: 
+					<br>Địa chỉ: Đại học Công Nghệ-đại học Quốc Gia Hà Nội - Số 141 Xuân Thủy, Cầu Giấy, Hà Nội
+					<br>Nhóm 6 - INT3306 4
+				</p>
+			</div>
+
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="../script/addControl.js"></script>
+</html>

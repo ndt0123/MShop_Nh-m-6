@@ -452,23 +452,18 @@ div.more-products-btn button:hover {
 }
 .prds-detail .add-buy-btn button {
 	margin: auto;
+    padding: 15px;
+    font-weight: bold;
 }
 .prds-detail .add-buy-btn .buying-btn {
 	border: solid 1px #4CAF50;
 	color: white;
 	background-color: #4CAF50;
 }
-.prds-detail .add-buy-btn .buying-btn:hover {
-	background-color: #44cc4a;
-}
 .prds-detail .add-buy-btn .adding-btn {
 	border: solid 1px #DBD521;
 	color: white;
 	background-color: #DBD521;
-}
-.prds-detail .add-buy-btn .adding-btn:hover {
-	color: white;
-	background-color: #ece626;
 }
 .comment-input-area form textarea {
 	border-radius: 3px 3px 0px 0px;
@@ -688,6 +683,88 @@ div.more-products-btn button:hover {
 	color: #955af2;
 }
 
+/* ----- Thanh toán mua hàng ----- */
+.payment-box {
+	background-color: white; 
+	border-radius: 3px; 
+	margin: 15px auto; 
+	width: 700px;
+}
+.payment-box .header-title {
+	text-align: center;
+	width: 100%;
+}
+.payment-box .header-title h4 {
+	margin: 15px 0px;
+}
+.payment-box .payment-products {
+	border-top: solid 0.7px #d6d6d6;
+	border-bottom: solid 0.7px #d6d6d6;
+	padding: 10px 15px;
+}
+.payment-box .customer-info {
+	padding: 10px 0px;
+}
+.payment-box .payment-products .detail .prd-info .info {
+	padding: 0px;
+	color: #8e8e8e;
+}
+.payment-box .payment-products .detail .prd-info p {
+	margin: 0px;
+	padding: 0px;
+}
+.payment-box .payment-products .detail .prd-info b {
+	margin: 0px 0px 10px 0px;
+	color: black;
+}
+.payment-box .payment-products .detail .prd-info .color select {
+	padding: 5px;
+	border-radius: 3px;
+	border: solid 1px #bfbfbf;
+}
+.payment-box .payment-products .detail .prd-info .color select:focus {
+	outline: 0;
+}
+.payment-box .payment-products .detail .prd-info .amount div {
+	padding: 5px 13px;
+	border: solid 1px #bfbfbf;
+}
+.payment-box .customer-info .user-info {
+	border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 10px 0px;
+}
+.payment-box .customer-info .add-info {
+	color: #288ad6;
+	cursor: pointer;
+}
+#city-list, #district-list {
+	margin: 0px;
+	position: absolute;
+    margin: 0px;
+    z-index: 2;
+    background-color: #f0f0f0;
+    height: 170px;
+    overflow: auto;
+    display: none;
+}
+.payment-box .customer-info .pay-area button {
+	border: none;
+    padding: 15px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: white;
+}
+.payment-box .customer-info p.error-input-info {
+	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
+	color: #dd4b39;
+	display: none;
+}
+
+
 
 /* -------------------- Mobile screen -------------------- */
 @media screen and (max-width:768px) {
@@ -730,6 +807,11 @@ div.more-products-btn button:hover {
 	/* ----- Home products ----- */
 	.box-home-products .top-div a.float-left {
 		display: none;
+	}
+
+	/* ----- Thanh toán mua hàng ----- */
+	.payment-box {
+		width: 100%;
 	}
 }
 
