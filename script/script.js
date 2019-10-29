@@ -130,6 +130,44 @@ $(document).ready(function () {
         $("#signIn-form").css("display", "block");
     });
 
+    /*function canSubmitLogIn() {
+        var canSubmit = true;
+        var username = $("#username-input-logIn").val();
+        var password = $("#password-input-logIn").val();
+
+        if(username == "") {
+            canSubmit = false;
+            $("#error-username-logIn").css("display", "block");
+        }
+        if(password == "") {
+            canSubmit = false;
+            $("#error-password-logIn").css("display", "block");
+        }
+
+        return canSubmit
+    }
+
+    function canSubmitSignIn() {
+        var canSubmit = true;
+        var username = $("#username-input-signIn").val();
+        var password = $("#password-input-signIn").val();
+        var passwordAgain = $("#password-input-signIn-again").val();
+        if(username == "") {
+            canSubmit = false;
+            $("#error-username-signIn").css("display", "block");
+        }
+        if(password == "") {
+            canSubmit = false;
+            $("#error-password-logIn").css("display", "block");
+        }
+        if(passwordAgain == "") {
+            canSubmit = false;
+            $("#error-password-signIn-again").css("display", "block");
+        }
+
+        return canSubmit;
+    }*/
+
 
     /*Hiển thị nhập bình luận khi click vào nút trả lời*/
     $(".reply-comment-btn").click(function () {
@@ -211,6 +249,7 @@ $(document).ready(function () {
         }
         
     });
+
 
 
 });

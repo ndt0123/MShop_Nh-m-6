@@ -756,8 +756,8 @@ div.more-products-btn button:hover {
     font-weight: bold;
     color: white;
 }
-.payment-box .customer-info p.error-input-info {
-	font-size: 12px;
+p.error-input-info {
+	font-size: 13px;
 	padding: 0px;
 	margin: 0px;
 	color: #dd4b39;
