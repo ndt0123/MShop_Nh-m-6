@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Phụ kiện</title>
+    <!---------- Include head ---------->
+    <% include elements/headTag.ejs %>
+
+</head>
+<body>
+    <!---------- Include header ---------->
+    <% include elements/header.ejs %>
+
+    <!---------- Include menu ---------->
+    <% include elements/menu.ejs %>
+
+    <!---------- Accessories products ---------->
+    <div class="container accessories-products phone-products">
+        <div class="accessories-types col-xs-12" id="acc-type-for-large-screen">
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=op+lung" title="Ốp lưng">
+                    <img src="../images/accessories_img/oplungdt.png" class="col-xs-12">
+                    <p class="col-xs-12">Ốp lưng</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=sac+du+phong" title="Sạc dự phòng">
+                    <img src="../images/accessories_img/pinsac.png" class="col-xs-12">
+                    <p class="col-xs-12">Sạc dự phòng</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=the+nho" title="Thẻ nhớ">
+                    <img src="../images/accessories_img/thenho.png" class="col-xs-12">
+                    <p class="col-xs-12">Thẻ nhớ</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=gay+selfie" title="Gậy selfie">
+                    <img src="../images/accessories_img/gay_selfie.png" class="col-xs-12">
+                    <p class="col-xs-12">Gậy selfie</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=dan+man+hinh" title="Dán màn hình">
+                    <img src="../images/accessories_img/miengdan_manhinh.png" class="col-xs-12">
+                    <p class="col-xs-12">Dán màn hình</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=tai+nghe" title="Tai nghe">
+                    <img src="../images/accessories_img/tainghe.png" class="col-xs-12">
+                    <p class="col-xs-12">Tai nghe</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=loa" title="Loa">
+                    <img src="../images/accessories_img/loa.png" class="col-xs-12">
+                    <p class="col-xs-12">Loa</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=usb+o+cung" title="USB - Ổ cứng">
+                    <img src="../images/accessories_img/usb_ocung.png" class="col-xs-12">
+                    <p class="col-xs-12">USB-Ổ cứng</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=sac+cap" title="Sạc cáp">
+                    <img src="../images/accessories_img/capsac.png" class="col-xs-12">
+                    <p class="col-xs-12">Sạc cáp</p>
+                </a>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <a href="/tim-kiem/phu-kien?loai=chuot" title="Chuột">
+                    <img src="../images/accessories_img/chuot.png" class="col-xs-12">
+                    <p class="col-xs-12">Chuột</p>
+                </a>
+            </div>
+        </div>
+        <div class="accessories-types col-xs-12" id="acc-type-for-small-screen">
+            <a href="/tim-kiem/phu-kien?loai=op+lung" class="float-left" title="Ốp lưng">Ốp lưng</a>
+            <a href="/tim-kiem/phu-kien?loai=sac+du+phong" class="float-left" title="Sạc dự phòng">Sạc dự phòng</a>
+            <a href="/tim-kiem/phu-kien?loai=the+nho" class="float-left" title="Thẻ nhớ">Thẻ nhớ</a>
+            <a href="/tim-kiem/phu-kien?loai=gay+selfie" class="float-left" title="Gậy selfie">Gậy selfie</a>
+            <a href="/tim-kiem/phu-kien?loai=dan+man+hinh" class="float-left" title="Dán màn hình">Dán màn hình</a>
+            <a href="/tim-kiem/phu-kien?loai=tai+nghe" class="float-left" title="Tai nghe">Tai nghe</a>
+            <a href="/tim-kiem/phu-kien?loai=loa" class="float-left" title="Loa">Loa</a>
+            <a href="/tim-kiem/phu-kien?loai=usb+o+cung" class="float-left" title="USB-Ổ cứng">USB-Ổ cứng</a>
+            <a href="/tim-kiem/phu-kien?loai=sac+cap" class="float-left" title="Sạc cáp">Sạc cáp</a>
+            <a href="/tim-kiem/phu-kien?loai=chuot" class="float-left" title="Chuột">Chuột</a>
+        </div>
+
+        <div class="filter col-xs-12">
+            <p class="float-left">Chọn mức giá: </p>
+            <a href="/tim-kiem/phu-kien?gia=duoi200" class="float-left">Dưới 200 nghìn</a>
+            <a href="/tim-kiem/phu-kien?gia=200-500" class="float-left">Từ 200-500 nghìn</a>
+            <a href="/tim-kiem/phu-kien?gia=500-1" class="float-left">Từ 500 nghìn-1 triệu</a>
+            <a href="/tim-kiem/phu-kien?gia=1-2" class="float-left">Từ 1-2 triệu</a>
+            <a href="/tim-kiem/phu-kien?gia=tren2" class="float-left">Trên 2 triệu</a>
+            <div class="dropdown float-left">
+                <button class="" type="button" id="menu1" data-toggle="dropdown">
+                    Sắp xếp giá
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="menu1">
+                    <li><a href="/tim-kiem/phu-kien?sap_xep=cao+den+thap">Cao đến thấp</a></li>
+                    <li><a href="/tim-kiem/phu-kien?sap_xep=thap+den+cao">Thấp đến cao</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box-products col-xs-12">
+
+            <div class="col-xs-12 top-div">
+                <h4 class="col-xs-12"><b>PHỤ KIỆN NỔI BẬT NHẤT</b></h4>
+            </div>
+
+            <div class="col-xs-12 middle-div">
+                <% for(var i=0; i<accessories.length; i++) { %>
+                    <a href="/chi-tiet/phu-kien/<%=accessories[i].id%>" class="col-md-3 col-sm-4 col-xs-6 prds" title="<%= accessories[i].ten %>">
+                        <img src="<%= accessories[i].hinhAnh %>" class="col-xs-12">
+                        <h5 class="col-xs-12 products-title" style="height: 30px; overflow:hidden; text-overflow:ellipsis;"><%= accessories[i].ten %></h5>
+                        <b class="col-xs-6"><%= accessories[i].giaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') %>đ</b>
+                        <strike class="col-xs-6"><%= accessories[i].giaGoc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') %>đ</strike>
+                        <div class="col-xs-12">
+                            <div class="buy-btn">
+                                <button type="button" class="btn btn-default">MUA NGAY</button>
+                            </div>
+                        </div>
+                    </a>
+                    <% } %>
+            </div>
+
+            <% if( moreAccessoriesNumber != 0 ) { %>
+                <div class="bottom-div col-xs-12">
+                    <div class="more-products-btn">
+                        <a href="/phu-kien/<%=pageNumber+1%>">
+                            <button type="button" class="btn btn-default" style="outline: 0;">
+                                Xem thêm <%= moreAccessoriesNumber %> phụ kiện
+                                <span class="glyphicon glyphicon-triangle-bottom"> </span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            <% } %>
+
+        </div>
+    </div>
+
+    <!---------- Include footer ---------->
+    <% include elements/footer.ejs %>
+
+</body>
+</html>

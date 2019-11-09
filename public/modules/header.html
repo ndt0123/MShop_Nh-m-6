@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../style/style.css">
+	<script type="text/javascript" src="../script/script.js"></script>
+	
+</head>
+<body>
+	<!------------ Header --------------->
+	<nav class="navbar navbar-default box-header">
+		<div class="container header">
+			<a href="index.html" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+				<img src="../images/demo_logo.png" id="logo">
+			</a>
+
+			<!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình nhỏ -->
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-small-screen">
+				<a href="gioHang.html" class="float-right" style="padding-left: 15px;" title="Giỏ hàng">
+		        	<span class="glyphicon glyphicon-shopping-cart"></span>
+		        </a>
+		        <a href="dangNhap.html" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+		        	<span class="glyphicon glyphicon-user"></span> 
+		        </a>
+			</div>
+			
+			<form class="col-lg-7 col-md-6 col-sm-5 col-xs-12">
+				<div>
+					<input type="text" name="" placeholder="Nhập tên điện thoại, phụ kiện cần tìm" class="float-left col-md-10 col-sm-9 col-xs-10">
+					<button class="float-left col-md-2 col-sm-3 col-xs-2">Tìm kiếm</button>
+				</div>
+			</form>
+
+			<!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình lớn -->
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style="padding-right: 0px;">
+				<a href="gioHang.html" class="float-right" style="padding-right: 15px;" title="Giỏ hàng">
+		        	<span class="glyphicon glyphicon-shopping-cart"></span> 
+		        	<br>
+		        	Giỏ hàng
+		        </a>
+		        <a href="dangNhap.html" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+		        	<span class="glyphicon glyphicon-user"></span> 
+		        	<br>
+		        	Đăng nhập
+		        </a>
+			</div>
+		</div>
+	</nav>
+</body>
+</html>

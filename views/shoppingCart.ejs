@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Giỏ hàng</title>
+    <!---------- Include head ---------->
+    <% include elements/headTag.ejs %>
+
+</head>
+<body>
+    <!---------- Include header ---------->
+    <% include elements/header.ejs %>
+
+    <!---------- Include menu ---------->
+    <% include elements/menu.ejs %>
+
+    <!---------- Shopping cart ---------->
+    <div class="container shopping-cart">
+
+        <!----- Các sản phẩm trong giỏ hàng ----->
+        <div class="col-xs-12 shopping-prds">
+            <div class="col-xs-12">
+                <h4>SẢN PHẨM TRONG GIỎ HÀNG</h4>
+            </div>
+            <div class="col-xs-12 title">
+                <p class="col-md-5 col-sm-5 col-xs-4">Sản phẩm</p>
+                <p class="col-md-2 col-sm-2 col-xs-2">Đơn giá</p>
+                <p class="col-md-2 col-sm-2 col-xs-2">Số lượng</p>
+                <p class="col-md-2 col-sm-2 col-xs-2">Số tiền</p>
+                <p class="col-md-1 col-sm-1 col-xs-2">Thao tác</p>
+            </div>
+            <div class="col-xs-12 prds-detail">
+                <div class="col-md-5 col-sm-5 col-xs-4">
+                    <a href="chiTietSanPham.html">
+                        <img src="../images/phone.png" class="col-md-3 col-sm-4 col-xs-5">
+                        <p class="col-md-9 col-sm-8 col-xs-7" style="text-align: left; color: black;">Samsung galaxy Note 10+</p>
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>1</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-2">
+                    <a href="" title="Xóa khỏi giỏ hàng"><p>Xóa</p></a>
+                </div>
+            </div>
+            <div class="col-xs-12 prds-detail">
+                <div class="col-md-5 col-sm-5 col-xs-4">
+                    <a href="chiTietSanPham.html">
+                        <img src="../images/phone.png" class="col-md-3 col-sm-4 col-xs-5">
+                        <p class="col-md-9 col-sm-8 col-xs-7" style="text-align: left; color: black;">Samsung galaxy Note 10+</p>
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>1</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-2">
+                    <a href="" title="Xóa khỏi giỏ hàng"><p>Xóa</p></a>
+                </div>
+            </div>
+            <div class="col-xs-12 prds-detail">
+                <div class="col-md-5 col-sm-5 col-xs-4">
+                    <a href="chiTietSanPham.html">
+                        <img src="../images/phone.png" class="col-md-3 col-sm-4 col-xs-5">
+                        <p class="col-md-9 col-sm-8 col-xs-7" style="text-align: left; color: black;">Samsung galaxy Note 10+</p>
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>1</p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-2">
+                    <a href="" title="Xóa khỏi giỏ hàng"><p>Xóa</p></a>
+                </div>
+            </div>
+
+
+            <!----- Tổng tiền ----->
+            <div class="col-xs-12 total-price">
+                <button type="button" class="btn btn-default float-right">MUA HÀNG</button>
+                <span class="float-right">
+                    <b style="color: red;">100.000.000 đ</b>
+                </span>
+                <span class="float-right">Tổng tiền hàng: </span>
+            </div>
+        </div>
+
+        <!----- Các sản phẩm đã đặt mua và đang chờ nhận hàng ----->
+        <div class="col-xs-12 shipping-prds">
+            <div class="col-xs-12">
+                <h4>SẢN PHẨM ĐÃ ĐẶT MUA</h4>
+            </div>
+            <div class="col-xs-12 title">
+                <p class="col-xs-4">Sản phẩm</p>
+                <p class="col-xs-2">Đơn giá</p>
+                <p class="col-xs-2">Số lượng</p>
+                <p class="col-xs-2">Số tiền</p>
+                <p class="col-xs-2">Tình trạng</p>
+            </div>
+            <div class="col-xs-12 prds-detail">
+                <div class="col-xs-4">
+                    <a href="chiTietSanPham.html">
+                        <img src="../images/phone.png" class="col-md-3 col-sm-4 col-xs-5">
+                        <p class="col-md-9 col-sm-8 col-xs-7" style="text-align: left; color: black;">Samsung galaxy Note 10+</p>
+                    </a>
+                </div>
+                <div class="col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>1</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>Đang giao hàng</p>
+                </div>
+            </div>
+        </div>
+
+        <!----- Các sản phẩm đã nhận hàng và thanh toán ----->
+        <div class="col-xs-12 bought-prds">
+            <div class="col-xs-12">
+                <h4>SẢN PHẨM ĐÃ THANH TOÁN</h4>
+            </div>
+            <div class="col-xs-12 title">
+                <p class="col-md-6 col-sm-6 col-xs-6">Sản phẩm</p>
+                <p class="col-md-2 col-sm-2 col-xs-2">Đơn giá</p>
+                <p class="col-md-2 col-sm-2 col-xs-2">Số lượng</p>
+                <p class="col-md-2 col-sm-2 col-xs-2">Số tiền</p>
+            </div>
+            <div class="col-xs-12 prds-detail">
+                <div class="col-xs-6">
+                    <a href="chiTietSanPham.html">
+                        <img src="../images/phone.png" class="col-md-3 col-sm-4 col-xs-5">
+                        <p class="col-md-9 col-sm-8 col-xs-7" style="text-align: left; color: black;">Samsung galaxy Note 10+</p>
+                    </a>
+                </div>
+                <div class="col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>1</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+            </div>
+            <div class="col-xs-12 prds-detail">
+                <div class="col-xs-6">
+                    <a href="chiTietSanPham.html">
+                        <img src="../images/phone.png" class="col-md-3 col-sm-4 col-xs-5">
+                        <p class="col-md-9 col-sm-8 col-xs-7" style="text-align: left; color: black;">Samsung galaxy Note 10+</p>
+                    </a>
+                </div>
+                <div class="col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>1</p>
+                </div>
+                <div class="col-xs-2">
+                    <p>26.500.000</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!----- Các sản phẩm gợi ý mua ----->
+        <div class="col-xs-12 recommended-prds">
+            <div class="col-xs-12">
+                <h4>CÓ THỂ BẠN CŨNG THÍCH</h4>
+            </div>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+            <a href="chiTietSanPham.html" class="col-md-3 col-sm-4 col-xs-6 prds" title="Samsung galaxy Note 10+">
+                <img src="../images/phone1_small_img.jpg" class="col-xs-12">
+                <h5 class="col-xs-12 products-title">Samsung galaxy Note 10+</h5>
+                <b class="col-xs-6">26.990.000đ</b>
+                <strike class="col-xs-6">26.500.000đ</strike>
+            </a>
+        </div>
+    </div>
+
+    <!---------- Include footer ---------->
+    <% include elements/footer.ejs %>
+
+</body>
+</html>

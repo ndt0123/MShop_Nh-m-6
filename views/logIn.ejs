@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng nhập</title>
+    <!---------- Include head ---------->
+    <% include elements/headTag.ejs %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style type="text/css">
+        body {
+            background-color: #f0f0f0;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!---------- logo ---------->
+    <div style="width: 100%; padding: 20px 0px 0px 0px;">
+        <div style="width: 200px; margin: auto;">
+            <a href="index.html">
+                <img src="../images/demo_logo.png">
+            </a>
+        </div>
+    </div>
+
+    <!---------- Log in, sign in form ---------->
+    <div class="box-logIn-signIn" style="">
+
+        <!---------- log in form ---------->
+        <div id="logIn-form">
+            <div class="logIn-title title" style="width: 100%;">
+                <p>ĐĂNG NHẬP</p>
+            </div>
+
+            <form class="logIn-form form" style="width: 100%;" onsubmit="return canSubmitLogIn()">
+                <div>
+                    <p>Tên đăng nhập</p>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input type="text" name="" placeholder="Nhập tên đăng nhập" id="username-input-logIn">
+
+                </div>
+                <p class="col-xs-12 error-input-info" id="error-username-logIn">Bạn cần nhập tên đăng nhập</p>
+                <div>
+                    <p>Mật khẩu</p>
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" name="" placeholder="Nhập mật khẩu" id="password-input-logIn">
+
+                </div>
+                <p class="col-xs-12 error-input-info" id="error-password-logIn">Bạn cần nhập mật khẩu</p>
+                <p class="col-xs-12 error-input-info" id="wrong-username-password">Tài khoản hoặc mật khẩu không đúng</p>
+                <p class="float-right" id="signIn-btn-option">Đăng ký</p>
+                <button>ĐĂNG NHẬP</button>
+            </form>
+            <div style="width: 100%;">
+                <p style="text-align: center; width: 100%; margin: 10px 0px;">Hoặc đăng nhập bằng</p>
+            </div>
+            <div class="logIn-with-fb-gg">
+                <div style="width: 144px; margin: auto;">
+                    <a href="">
+                        <div class="fb" title="Facebook">
+                            <span class="fa fa-facebook"></span>
+                        </div>
+                    </a>
+
+                    <a href="">
+                        <div class="gg" title="Google">
+                            <span class="fa fa-google"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!---------- sign in form ---------->
+        <div id="signIn-form" style="display: none;">
+            <div class="logIn-title title" style="width: 100%;">
+                <p>ĐĂNG KÝ</p>
+            </div>
+
+            <form class="logIn-form form" style="width: 100%;" onsubmit="return canSubmitSignIn()">
+                <div>
+                    <p>Tên đăng nhập</p>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input type="text" name="" placeholder="Nhập tên đăng nhập" id="username-input-signIn">
+                </div>
+                <p class="col-xs-12 error-input-info" id="error-username-signIn">Bạn cần nhập tên đăng nhập</p>
+                <div>
+                    <p>Mật khẩu</p>
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" name="" placeholder="Nhập mật khẩu" id="password-input-signIn">
+                </div>
+                <p class="col-xs-12 error-input-info" id="error-password-signIn">Bạn cần nhập mật khẩu</p>
+                <div>
+                    <p>Xác nhận mật khẩu</p>
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" name="" placeholder="Xác nhận mật khẩu" id="password-input-signIn-again">
+                </div>
+                <p class="col-xs-12 error-input-info" id="error-password-signIn-again">Bạn cần xác nhận lại mật khẩu</p>
+                <p class="float-right" id="logIn-btn-option">Đăng nhập</p>
+                <button>ĐĂNG KÝ</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function canSubmitLogIn() {
+            var canSubmit = true;
+            var username = $("#username-input-logIn").val();
+            var password = $("#password-input-logIn").val();
+
+            if (username == "") {
+                canSubmit = false;
+                $("#error-username-logIn").css("display", "block");
+            } else {
+                $("#error-username-logIn").css("display", "none");
+            }
+            if (password == "") {
+                canSubmit = false;
+                $("#error-password-logIn").css("display", "block");
+            } else {
+                $("#error-password-logIn").css("display", "none");
+            }
+
+            return canSubmit
+        }
+
+        function canSubmitSignIn() {
+            var canSubmit = true;
+            var username = $("#username-input-signIn").val();
+            var password = $("#password-input-signIn").val();
+            var passwordAgain = $("#password-input-signIn-again").val();
+            if (username == "") {
+                canSubmit = false;
+                $("#error-username-signIn").css("display", "block");
+            } else {
+                $("#error-username-signIn").css("display", "none");
+            }
+            if (password == "") {
+                canSubmit = false;
+                $("#error-password-signIn").css("display", "block");
+            } else {
+                $("#error-password-signIn").css("display", "none");
+            }
+            if (passwordAgain == "" && password != "") {
+                canSubmit = false;
+                $("#error-password-signIn-again").text("Bạn cần xác nhận lại mật khẩu");
+                $("#error-password-signIn-again").css("display", "block");
+            } else if (passwordAgain != password && password != "") {
+                canSubmit = false;
+                $("#error-password-signIn-again").text("Mật khẩu xác nhận bị sai");
+                $("#error-password-signIn-again").css("display", "block");
+            } else {
+                $("#error-password-signIn-again").css("display", "none");
+            }
+
+            return canSubmit;
+        }
+    </script>
+</body>
+</html>
