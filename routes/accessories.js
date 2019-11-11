@@ -10,6 +10,15 @@ router.get('/', function (req, res, next) {
     var moreAccessoriesNumber;
     var pageNumber;
 
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
+
     var queryPhone = "SELECT * FROM phukien INNER JOIN hinhanhphukien ON phukien.MaPhuKien=hinhanhphukien.MaPhuKien GROUP BY phukien.MaPhuKien ORDER BY phukien.MaPhuKien DESC";
     connect_db.con.query(queryPhone, function (err, result, feilds) {
         if (err) throw err;
@@ -26,7 +35,7 @@ router.get('/', function (req, res, next) {
         moreAccessoriesNumber = result.length - 12;
         pageNumber = 1;
 
-        res.render('accessories.ejs', { accessories, moreAccessoriesNumber, pageNumber });
+        res.render('accessories.ejs', { accessories, moreAccessoriesNumber, pageNumber, account, level });
 
     });
 
@@ -37,6 +46,15 @@ router.get('/:page', function (req, res, next) {
     var accessories = [];
     var moreAccessoriesNumber;
     var pageNumber = parseInt(req.params.page);
+
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
 
     var queryPhone = "SELECT * FROM phukien INNER JOIN hinhanhphukien ON phukien.MaPhuKien=hinhanhphukien.MaPhuKien GROUP BY phukien.MaPhuKien ORDER BY phukien.MaPhuKien DESC";
     connect_db.con.query(queryPhone, function (err, result, feilds) {
@@ -71,7 +89,7 @@ router.get('/:page', function (req, res, next) {
             moreAccessoriesNumber = 0;
         }
 
-        res.render('accessories.ejs', { accessories, moreAccessoriesNumber, pageNumber });
+        res.render('accessories.ejs', { accessories, moreAccessoriesNumber, pageNumber, account, level });
 
     });
 

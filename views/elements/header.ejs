@@ -10,7 +10,7 @@
             <a href="/gio-hang" class="float-right" style="padding-left: 15px;" title="Giỏ hàng">
                 <span class="glyphicon glyphicon-shopping-cart"></span>
             </a>
-            <a href="/dang-nhap" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+            <a href="/tai-khoan" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
@@ -24,16 +24,35 @@
 
         <!-- Phần đăng nhập, đăng ký và giỏ hàng khi màn hình lớn -->
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style="padding-right: 0px;">
-            <a href="/gio-hang" class="float-right" style="padding-right: 15px;" title="Giỏ hàng">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <br>
-                Giỏ hàng
-            </a>
-            <a href="/dang-nhap" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
-                <span class="glyphicon glyphicon-user"></span>
-                <br>
-                Đăng nhập
-            </a>
+
+            <% if(typeof account != 'undefined') { %>
+                <a href="/gio-hang" class="float-right" style="padding-right: 15px; font-size: 20px;" title="Giỏ hàng">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                </a>
+
+                <div class="float-right">
+                    <a href="/tai-khoan" style="padding-right: 15px; font-size: 16px;" title="">
+                        <strong style="margin: 0px; font-size: 16px;">
+                            <%= account %>
+                        </strong>
+                    </a>
+                    <a>
+                        <p>Đăng xuất</p>
+                    </a>
+                </div>
+            <% } else { %>
+                <a href="/gio-hang" class="float-right" style="padding-right: 15px;" title="Giỏ hàng">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    <br />
+                    Giỏ hàng
+                </a>
+                <a href="/tai-khoan" class="float-right" style="padding-right: 15px;" title="Đăng nhập">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <br />
+                    Đăng nhập
+                </a>
+            <% } %>
+
         </div>
     </div>
 </nav>

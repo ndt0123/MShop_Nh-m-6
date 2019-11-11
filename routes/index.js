@@ -10,6 +10,15 @@ router.get('/', function (req, res, next) {
     var accessories = [];
     var saleOff = [];
 
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
+
     var queryPhone = "SELECT * FROM dienthoai INNER JOIN hinhanhdienthoai ON dienthoai.MaDienThoai=hinhanhdienthoai.MaDT GROUP BY dienthoai.MaDienThoai ORDER BY dienthoai.MaDienThoai DESC";
 
     connect_db.con.query(queryPhone, function (err, result, fields) {
@@ -51,10 +60,8 @@ router.get('/', function (req, res, next) {
                     });
 
                 }
-                console.log(saleOff);
-                console.log(phones);
-                console.log(accessories);
-                res.render('index.ejs', { phones, accessories, saleOff });
+
+                res.render('index.ejs', { phones, accessories, saleOff, account, level });
             });
                 
                 

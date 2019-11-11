@@ -10,6 +10,15 @@ router.get('/', function (req, res, next) {
     var morePhoneNumber;
     var pageNumber;
 
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
+
     var queryPhone = "SELECT * FROM dienthoai INNER JOIN hinhanhdienthoai ON dienthoai.MaDienThoai=hinhanhdienthoai.MaDT GROUP BY dienthoai.MaDienThoai ORDER BY dienthoai.MaDienThoai DESC";
     connect_db.con.query(queryPhone, function (err, result, feilds) {
         if (err) throw err;
@@ -26,7 +35,7 @@ router.get('/', function (req, res, next) {
         morePhoneNumber = result.length - 12;
         pageNumber = 1;
 
-        res.render('phone.ejs', { phones, morePhoneNumber, pageNumber });
+        res.render('phone.ejs', { phones, morePhoneNumber, pageNumber, account, level });
 
     });
 
@@ -38,6 +47,15 @@ router.get('/:page', function (req, res, next) {
     var phones = [];
     var morePhoneNumber;
     var pageNumber = parseInt(req.params.page);
+
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
 
     var queryPhone = "SELECT * FROM dienthoai INNER JOIN hinhanhdienthoai ON dienthoai.MaDienThoai=hinhanhdienthoai.MaDT GROUP BY dienthoai.MaDienThoai ORDER BY dienthoai.MaDienThoai DESC";
     connect_db.con.query(queryPhone, function (err, result, feilds) {
@@ -65,7 +83,6 @@ router.get('/:page', function (req, res, next) {
             }
         }
 
-        console.log(phones);
 
         if (result.length - 12 * pageNumber > 0) {
             morePhoneNumber = result.length - 12;
@@ -73,7 +90,7 @@ router.get('/:page', function (req, res, next) {
             morePhoneNumber = 0;
         }
 
-        res.render('phone.ejs', { phones, morePhoneNumber, pageNumber });
+        res.render('phone.ejs', { phones, morePhoneNumber, pageNumber, account, level });
 
     });
 

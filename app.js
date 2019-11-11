@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var session = require('express-session');
+var bodyParser = require('body-parser');
+
 var indexRouter = require('./routes/index');
 var accessoriesRouter = require('./routes/accessories');
 var phoneRouter = require('./routes/phone');
@@ -14,6 +17,15 @@ var shoppingRouter = require('./routes/shopping');
 var shoppingCartRouter = require('./routes/shoppingCart');
 
 var app = express();
+
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,12 +39,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/dien-thoai', phoneRouter);
-app.use('/dang-nhap', logInRouter);
+app.use('/tai-khoan', logInRouter);
 app.use('/phu-kien', accessoriesRouter);
 app.use('/chi-tiet', productDetailRouter);
 app.use('/tim-kiem', searchingResultRouter);
 app.use('/mua-hang', shoppingRouter);
 app.use('/gio-hang', shoppingCartRouter);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,7 +3,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('shoppingCart.ejs');
+
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
+
+    res.render('shoppingCart.ejs', { account, level });
 });
 
 module.exports = router;
