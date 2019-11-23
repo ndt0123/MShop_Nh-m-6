@@ -1,0 +1,42 @@
+var express = require('express');
+var router = express.Router();
+
+const connect_db = require('../modules/connect_db');
+
+/* GET home page. */
+router.get('/', function (req, res, next) {
+
+    var accessories = [];
+    var accessoriesNumber;
+
+    var account;
+    var level;
+    if (req.session.username) {
+        account = req.session.username;
+    }
+    if (req.session.level) {
+        level = req.session.level;
+    }
+
+
+    var queryPhone = "SELECT * FROM phukien INNER JOIN hinhanhphukien ON phukien.MaPhuKien=hinhanhphukien.MaPhuKien GROUP BY phukien.MaPhuKien ORDER BY phukien.MaPhuKien DESC";
+    connect_db.con.query(queryPhone, function (err, result, feilds) {
+        if (err) throw err;
+
+        for (var i = 0; i < result.length; i++) {
+
+            accessories.push({
+                id: result[i].MaPhuKien, loai: result[i].LoaiPhuKien, ten: result[i].TenPhuKien,
+                giaBan: result[i].GiaBan, giaGoc: result[i].KhuyenMai + result[i].GiaBan,
+                hinhAnh: result[i].DuongDan
+            });
+
+        }
+        accessoriesNumber = result.length;
+        res.json({ accessories, accessoriesNumber, account, level });
+
+    });
+
+});
+
+module.exports = router;
