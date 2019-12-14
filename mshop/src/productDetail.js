@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import axios from 'axios';
-
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 import Product from './components/product.js';

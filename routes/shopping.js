@@ -76,7 +76,7 @@ router.post('/dien-thoai', function (req, res, next) {
                 if (err2) throw err2;
 
                 //Câu query insert vào bảng đơn hàng
-                var queryInsertDonHang = "INSERT INTO`donhang`(`MADonHang`, `MaKhachHang`, `DiaChi`, `HoTen`, `SoDienThoai`, `Email`, `NgayDatHang`, `NgayChuyenHang`, `NgayNhanHang`, `TrangThai`, `GhiChu`) VALUES(NULL, '" + result2[0].MaNguoiDung + "', '" + diaChi + "', '" + hoTen + "', '" + sdt + "', '" + email + "', 'current_timestamp()', NULL, NULL, 'Đang chờ', NULL)";
+                var queryInsertDonHang = "INSERT INTO`donhang`(`MADonHang`, `MaKhachHang`, `DiaChi`, `HoTen`, `SoDienThoai`, `Email`, `NgayDatHang`, `NgayChuyenHang`, `NgayNhanHang`, `TrangThai`, `GhiChu`) VALUES(NULL, '" + result2[0].MaNguoiDung + "', '" + diaChi + "', '" + hoTen + "', '" + sdt + "', '" + email + "', current_timestamp(), NULL, NULL, 'Đang chờ', NULL)";
                 connect_db.con.query(queryInsertDonHang, function (err3, result3) { //Insert vào bảng đơn hàng
                     if (err3) throw err3;
 
@@ -171,7 +171,7 @@ router.post('/phu-kien', function (req, res, next) {
                 if (err2) throw err2;
 
                 //Câu query insert vào bảng đơn hàng
-                var queryInsertDonHang = "INSERT INTO`donhang`(`MADonHang`, `MaKhachHang`, `DiaChi`, `HoTen`, `SoDienThoai`, `Email`, `NgayDatHang`, `NgayChuyenHang`, `NgayNhanHang`, `TrangThai`, `GhiChu`) VALUES(NULL, '" + result2[0].MaNguoiDung + "', '" + diaChi + "', '" + hoTen + "', '" + sdt + "', '" + email + "', 'current_timestamp()', NULL, NULL, 'Đang chờ', NULL)";
+                var queryInsertDonHang = "INSERT INTO`donhang`(`MADonHang`, `MaKhachHang`, `DiaChi`, `HoTen`, `SoDienThoai`, `Email`, `NgayDatHang`, `NgayChuyenHang`, `NgayNhanHang`, `TrangThai`, `GhiChu`) VALUES(NULL, '" + result2[0].MaNguoiDung + "', '" + diaChi + "', '" + hoTen + "', '" + sdt + "', '" + email + "', current_timestamp(), NULL, NULL, 'Đang chờ', NULL)";
                 connect_db.con.query(queryInsertDonHang, function (err3, result3) { //Insert vào bảng đơn hàng
                     if (err3) throw err3;
 
@@ -202,7 +202,62 @@ router.post('/phu-kien', function (req, res, next) {
 });
 
 router.get('/gio-hang', function (req, res, next) {
+    var shoppingProducts = []; //Biến lưu các sản phẩm trong giỏ hàng
 
+    var errorLogin = "Bạn cần đăng nhập để thực hiện tác vụ này."; //Biến lưu lỗi chưa đăng nhập
+    var errorRes = "Đã xảy ra lỗi"; //Biến lưu lỗi bên server
+
+    //Kiểm tra xem người dùng đã đăng nhập chưa
+    //Nếu chưa báo lỗi
+    if (typeof req.session.username == "undefined" || typeof req.session.level == "undefined") {
+        res.json({ errorLogin });
+    } else {
+        //query lấy id của người dùng
+        var queryIdAccount = "SELECT MaNguoiDung FROM nguoidung WHERE TenDangNhap='" + req.session.username + "'";
+        connect_db.con.query(queryIdAccount, function (err1, result1) {
+            if (err1) {
+                throw err1;
+                res.json({ errorRes });
+            } 
+
+            //Query lấy các sản phẩm là điện thoại trong giỏ hàng của người dùng
+            var queryShoppingPhoneProducts = "SELECT MaGioHang, MaSanPham, LoaiSanPham, TenDienThoai, GiaBan, GiaKhuyenMai, DuongDan FROM giohang INNER JOIN dienthoai INNER JOIN hinhanhdienthoai ON giohang.MaSanPham=dienthoai.MaDienThoai AND dienthoai.MaDienThoai=hinhanhdienthoai.MaDT WHERE giohang.MaKhachHang=" + result1[0].MaNguoiDung + " AND giohang.LoaiSanPham='Điện thoại' GROUP BY dienthoai.MaDienThoai";
+            connect_db.con.query(queryShoppingPhoneProducts, function (err2, result2) {
+                if (err2) {
+                    throw err2;
+                    res.json({ errorRes });
+                }
+                for (var i = 0; i < result2.length; i++) {
+                    if (result2[i].GiaKhuyenMai == null) {
+                        shoppingProducts.push({ MaGioHang: result2[i].MaGioHang, MaSanPham: result2[i].MaSanPham, LoaiSanPham: result2[i].LoaiSanPham, TenSanPham: result2[i].TenDienThoai, GiaBan: result2[i].GiaBan, DuongDan: result2[i].DuongDan, SoLuong: 1 });
+                    } else {
+                        shoppingProducts.push({ MaGioHang: result2[i].MaGioHang, MaSanPham: result2[i].MaSanPham, LoaiSanPham: result2[i].LoaiSanPham, TenSanPham: result2[i].TenDienThoai, GiaBan: result2[i].GiaKhuyenMai, DuongDan: result2[i].DuongDan, SoLuong: 1 });
+                    }
+                }
+                //Query lấy các sản phẩm là phụ kiện trong giỏ hàng của người dùng
+                var queryShoppingAccProducts = "SELECT MaGioHang, MaSanPham, LoaiSanPham, TenPhuKien, GiaBan, GiaKhuyenMai, DuongDan FROM giohang INNER JOIN phukien INNER JOIN hinhanhphukien ON giohang.MaSanPham=phukien.MaPhuKien AND phukien.MaPhuKien=hinhanhphukien.MaPhuKien WHERE giohang.MaKhachHang=" + result1[0].MaNguoiDung + " AND giohang.LoaiSanPham='Phụ kiện' GROUP BY phukien.MaPhuKien";
+                connect_db.con.query(queryShoppingAccProducts, function (err3, result3) {
+                    if (err3) {
+                        throw err3;
+                        res.json({ errorRes });
+                    }
+
+                    for (var i = 0; i < result3.length; i++) {
+                        if (result3[i].GiaKhuyenMai == null) {
+                            shoppingProducts.push({ MaGioHang: result3[i].MaGioHang, MaSanPham: result3[i].MaSanPham, LoaiSanPham: result3[i].LoaiSanPham, TenSanPham: result3[i].TenPhuKien, GiaBan: result3[i].GiaBan, DuongDan: result3[i].DuongDan, SoLuong: 1 });
+                        } else {
+                            shoppingProducts.push({ MaGioHang: result3[i].MaGioHang, MaSanPham: result3[i].MaSanPham, LoaiSanPham: result3[i].LoaiSanPham, TenSanPham: result3[i].TenPhuKien, GiaBan: result3[i].GiaKhuyenMai, DuongDan: result3[i].DuongDan, SoLuong: 1 });
+                        }
+                    }
+                    res.json({ shoppingProducts });
+                })
+            })
+        })
+    }
 });
+
+router.post('gio-hang', function (req, res, next) {
+
+})
 
 module.exports = router;

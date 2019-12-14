@@ -37,6 +37,16 @@ class Header extends React.Component {
         }
     }
 
+    onClickShoppingCartBtn = (event) => {
+        if (this.state.userName == "") {
+            event.preventDefault();
+            var mess = window.confirm("Bạn cần đăng nhập để có thể thực hiện tác vụ này.");
+            if (mess == true) {
+                window.location = "http://localhost:3000/tai-khoan/dang-nhap";
+            }
+        }
+    }
+
     render() {
 
         return (
@@ -47,9 +57,7 @@ class Header extends React.Component {
                     </Link>
 
                     <div className="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-small-screen" style={{ top: "50%", transform: "translateY(6px)", paddingLeft: "0px" }}>
-                        <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng">
-                            Giỏ hàng
-                        </Link>
+                        <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng" onClick={this.onClickShoppingCartBtn}>Giỏ hàng</Link>
                         {
                             this.state.userName == "" ?
                                 <Link to="/tai-khoan/dang-nhap" className="float-right right-btn" title="Đăng nhập">
@@ -69,10 +77,8 @@ class Header extends React.Component {
 				        </div>
 			        </form>
 
-                    <div className="col-lg-3 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style={{ top: "50%", transform: "translateY(6px)", paddingLeft: "0px"}}>
-                        <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng">
-                                Giỏ hàng
-		                </Link>
+                    <div className="col-lg-3 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style={{ top: "50%", transform: "translateY(6px)", paddingLeft: "0px" }}>
+                        <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng" onClick={this.onClickShoppingCartBtn}>Giỏ hàng</Link>
                         {
                             this.state.userName == "" ?
                                 <Link to="/tai-khoan/dang-nhap" className="float-right right-btn" title="Đăng nhập">

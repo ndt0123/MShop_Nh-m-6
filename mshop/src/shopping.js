@@ -8,6 +8,7 @@ import NotFound from './components/404NotFound.js';
 var shopping;
 var paymentAccessories;
 var paymentPhone;
+var paymentShoppingCart;
 
 class PaymentAccessories extends React.Component {
     constructor(props) {
@@ -212,7 +213,6 @@ class PaymentPhone extends React.Component {
                     error: result.data.error
                 })
             }
-            console.log(result);
         });
     }
 
@@ -256,6 +256,154 @@ class PaymentPhone extends React.Component {
                 <div className="col-xs-12 total-payment" style={{ borderTop: "solid 1px #f0f0f0", padding: "15px 0px" }}>
                     <b className="float-left">Tổng tiền thanh toán:</b>
                     <b className="float-right" style={{ color: "#b10000" }}>{this.state.detail.giaBan * this.state.productsNumber} đ</b>
+                </div>
+            </div>
+            );
+    }
+}
+
+class PaymentShoppingCart extends React.Component {
+    constructor(props) {
+        super(props);
+        paymentShoppingCart = this;
+        this.state = {
+            shoppingProducts: [{ MaGioHang: 0, MaSanPham: 0, LoaiSanPham: "", TenSanPham: "", GiaBan: 0, DuongDan: "", SoLuong: 1 }],
+            totalAmount: 0
+        }
+    }
+    componentDidMount() {
+        axios.get('/mua-hang/gio-hang').then(result => {
+            if (typeof result.data.errorLogin != "undefined") {
+                alert(result.data.errorLogin);
+                window.location = "http://localhost:3000/tai-khoan/dang-nhap";
+            } else {
+                this.setState({
+                    shoppingProducts: result.data.shoppingProducts
+                })
+                for (var i = 0; i < this.state.shoppingProducts.length; i++) {
+                    this.setState({
+                        totalAmount: this.state.totalAmount + this.state.shoppingProducts[i].GiaBan
+                    })
+                }
+            }
+        });
+        
+    }
+    render() {
+        return (
+            <div className="col-xs-12 payment-products">
+                {
+                    this.state.shoppingProducts.map(function (note, index) {
+                        return (
+                            <div className="col-xs-12 detail" style={{ padding: "0px", margin: "10px 0px" }} key={index}>
+                                <div className="col-xs-3 img">
+                                    <img className="col-xs-12" src={note.DuongDan} style={{ padding: "0px" }} />
+                                </div>
+
+                                <div className="col-xs-9 prd-info">
+                                    <div className="col-xs-12 info" style={{ padding: "0px" }}>
+                                        <b className="float-left col-sm-8 col-xs-7" style={{ padding: "0px" }}>{note.TenSanPham}</b>
+                                        <b className="float-right col-sm-4 col-xs-5" style={{ color: "#b10000", paddingRight: "0px", textAlign: "right" }}>{note.GiaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</b>
+                                    </div>
+                                    
+                                    <div className="col-xs-12 color-and-amount" style={{ padding: "10px 0px" }}>
+                                        <div className="float-left amount" style={{ padding: "0px" }}>
+                                            <div className="float-left" id={"minus_" + index} style={{ cursor: "default", color: "#afafaf" }} onClick={() => {
+                                                if (note.SoLuong > 1) {
+                                                    paymentShoppingCart.state.shoppingProducts[index].SoLuong = note.SoLuong - 1;
+                                                    paymentShoppingCart.setState(paymentShoppingCart.state);
+
+                                                    paymentShoppingCart.setState({
+                                                        totalAmount: paymentShoppingCart.state.totalAmount - note.GiaBan
+                                                    })
+                                                }
+                                                if (paymentShoppingCart.state.shoppingProducts[index].SoLuong > 1) {
+                                                    document.getElementById("minus_" + index).style.color = "#288ad6";
+                                                    document.getElementById("minus_" + index).style.cursor = "pointer";
+                                                } else {
+                                                    document.getElementById("minus_" + index).style.color = "#afafaf";
+                                                    document.getElementById("minus_" + index).style.cursor = "default";
+                                                }
+                                            }}><span className="fa fa-minus"></span></div>
+                                            <div className="float-left" id="prd-amount" style={{ borderLeft: "0px", borderRight: "0px", width: "36px", textAlign: "center" }}>{note.SoLuong}</div>
+                                            <div className="float-left" id={"plus_" + index} style={{ cursor: "pointer", color: "#288ad6" }} onClick={() => {
+                                                if (note.LoaiSanPham == "Điện thoại") {
+                                                    axios.get('/mua-hang/dien-thoai?id=' + note.MaSanPham).then(result => {
+                                                        if (typeof result.data.error == "undefined") {
+                                                            if (result.data.detail) {
+                                                                if (result.data.detail.soLuong > note.SoLuong) {
+                                                                    paymentShoppingCart.state.shoppingProducts[index].SoLuong = note.SoLuong + 1;
+                                                                    paymentShoppingCart.setState(paymentShoppingCart.state);
+
+                                                                    paymentShoppingCart.setState({
+                                                                        totalAmount: paymentShoppingCart.state.totalAmount + note.GiaBan
+                                                                    })
+                                                                    if (paymentShoppingCart.state.shoppingProducts[index].SoLuong > 0) {
+                                                                        document.getElementById("minus_" + index).style.color = "#288ad6";
+                                                                        document.getElementById("minus_" + index).style.cursor = "pointer";
+                                                                    }
+                                                                } else {
+                                                                    alert("Xin lỗi!\nSố lượng sản phẩm trong kho không đủ.")
+                                                                }
+                                                            } else {
+                                                                alert("Đã xảy ra lỗi");
+                                                            }
+                                                        } else {
+                                                            alert("Đã xảy ra lỗi");
+                                                        }
+                                                    });
+                                                } else if (note.LoaiSanPham == "Phụ kiện") {
+                                                    axios.get('/mua-hang/phu-kien?id=' + note.MaSanPham).then(result => {
+                                                        if (typeof result.data.error == "undefined") {
+                                                            if (result.data.detail) {
+                                                                if (result.data.detail.soLuong > note.SoLuong) {
+                                                                    paymentShoppingCart.state.shoppingProducts[index].SoLuong = note.SoLuong + 1;
+                                                                    paymentShoppingCart.setState(paymentShoppingCart.state);
+
+                                                                    paymentShoppingCart.setState({
+                                                                        totalAmount: paymentShoppingCart.state.totalAmount + note.GiaBan
+                                                                    })
+                                                                    if (paymentShoppingCart.state.shoppingProducts[index].SoLuong > 0) {
+                                                                        document.getElementById("minus_" + index).style.color = "#288ad6";
+                                                                        document.getElementById("minus_" + index).style.cursor = "pointer";
+                                                                    }
+                                                                } else {
+                                                                    alert("Xin lỗi!\nSố lượng sản phẩm trong kho không đủ.")
+                                                                }
+                                                            } else {
+                                                                alert("Đã xảy ra lỗi");
+                                                            }
+                                                        } else {
+                                                            alert("Đã xảy ra lỗi");
+                                                        }
+                                                    });
+                                                }
+                                            }}><span className="fa fa-plus"></span></div>
+                                        </div>
+                                        <div className="float-right color" style={{ padding: "0px", margin: "1px 0px" }}>
+                                            <p style={{ color: "red", cursor: "pointer" }} title="Xóa khỏi giỏ hàng" onClick={() => {
+                                                var mess = window.confirm("Bạn có chăc muốn xóa sản phẩm khỏi giỏ hàng không?");
+                                                if (mess == true) {
+                                                    axios.get('/gio-hang/xoa?id=' + note.MaGioHang).then(result => { })
+                                                    axios.get('/mua-hang/gio-hang').then(result => {
+                                                        paymentShoppingCart.setState({
+                                                            shoppingProducts: result.data.shoppingProducts
+                                                        })
+                                                    });
+                                                }
+                                            }}>Xóa</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            );
+                    })
+                }
+
+                <div className="col-xs-12 total-payment" style={{ borderTop: "solid 1px #f0f0f0", padding: "15px 0px" }}>
+                    <b className="float-left">Tổng tiền thanh toán:</b>
+                    <b className="float-right" style={{ color: "#b10000" }}>{this.state.totalAmount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</b>
                 </div>
             </div>
             );
@@ -520,6 +668,7 @@ class Shopping extends React.Component {
                             <Router>
                                 <Route path="/mua-hang/dien-thoai" exact component={PaymentPhone} />
                                 <Route path="/mua-hang/phu-kien" exact component={PaymentAccessories} />
+                                <Route path="/mua-hang/gio-hang" exact component={PaymentShoppingCart} />
                             </Router>
 
                             <div className="col-xs-12 customer-info">

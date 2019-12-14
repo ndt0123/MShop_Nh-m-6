@@ -479,11 +479,6 @@ div.more-products-btn button:hover {
     margin: 15px 0px;
 }
 
-.shopping-cart .prds-detail a {
-    text-decoration: none;
-    color: red;
-}
-
 .shopping-cart .shopping-prds .total-price span {
     margin: 0px 3px;
     top: 50%;
