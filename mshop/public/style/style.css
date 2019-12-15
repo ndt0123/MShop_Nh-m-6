@@ -112,22 +112,22 @@ div.more-products-btn button:hover {
     display: none;
 }
 
-.box-header .header form button {
+.box-header .header div button {
     height: 44px;
     border: none;
 }
 
-.box-header .header form input {
+.box-header .header div input {
     height: 44px;
     border: none;
 }
 
-.box-header .header form div input {
+.box-header .header div input {
     border-radius: 3px 0px 0px 3px;
     border-right: 0px;
 }
 
-.box-header .header form div button {
+.box-header .header div button {
     border-radius: 0px 3px 3px 0px;
     background-color: #DBD521;
 }

@@ -159,9 +159,6 @@ class AccessoriesFilter extends React.Component {
     // Kiểm tra sự kiện onChange lên accessories type filter bên trái
     onChangeAccessoriesTypeFilter = (event) => {
 
-        console.log(event.target.checked);
-        console.log(event.target.value);
-
         // Nếu click chọn một loại phụ kiện nào đó thì thêm value đó vào state accessoriesTypeFilter
         // Nếu bỏ chọn thì xóa value đó khỏi state accessoriesTypeFilter
         if (event.target.checked) {
@@ -173,15 +170,11 @@ class AccessoriesFilter extends React.Component {
             this.setState(this.state);
         }
 
-        console.log(this.state.accessoriesTypeFilter);
-
         getDataFromAccessoriesFilter(this.state.accessoriesTypeFilter, this.state.accessoriesPriceFilter);
     }
 
     // Kiểm tra sự kiện onChange lên accessories price filter bên trái
     onChangeAccessoriesPriceFilter = (event) => {
-        console.log(event.target.checked);
-        console.log(event.target.value);
 
         // Nếu click chọn một mức giá nào đó thì thêm value đó vào state accessoriesPriceFilter
         // Nếu bỏ chọn thì xóa value đó khỏi state accessoriesPriceFilter
@@ -193,8 +186,6 @@ class AccessoriesFilter extends React.Component {
             this.state.accessoriesPriceFilter.splice(i, 1);
             this.setState(this.state);
         }
-
-        console.log(this.state.accessoriesPriceFilter);
 
         getDataFromAccessoriesFilter(this.state.accessoriesTypeFilter, this.state.accessoriesPriceFilter);
     }
@@ -337,9 +328,6 @@ class PhoneFilter extends React.Component {
     // Kiểm tra sự kiện onChange lên phone company filter bên trái
     onChangePhoneCompanyFilter = (event) => {
 
-        console.log(event.target.checked);
-        console.log(event.target.value);
-
         // Nếu click chọn một hãng điện thoại nào đó thì thêm value đó vào state phoneCompaniesFilter
         // Nếu bỏ chọn thì xóa value đó khỏi state phoneCompaniesFilter
         if (event.target.checked) {
@@ -351,15 +339,11 @@ class PhoneFilter extends React.Component {
             this.setState(this.state);
         }
 
-        console.log(this.state.phoneCompaniesFilter);
-
         getDataFromPhoneFilter(this.state.phoneCompaniesFilter, this.state.phonePriceFilter);
     }
 
     // Kiểm tra sự kiện onChange lên phone price filter bên trái
     onChangePhonePriceFilter = (event) => {
-        console.log(event.target.checked);
-        console.log(event.target.value);
 
         // Nếu click chọn một hãng điện thoại nào đó thì thêm value đó vào state phoneCompaniesFilter
         // Nếu bỏ chọn thì xóa value đó khỏi state phoneCompaniesFilter
@@ -371,8 +355,6 @@ class PhoneFilter extends React.Component {
             this.state.phonePriceFilter.splice(i, 1);
             this.setState(this.state);
         }
-
-        console.log(this.state.phonePriceFilter);
 
         getDataFromPhoneFilter(this.state.phoneCompaniesFilter, this.state.phonePriceFilter);
     }
@@ -495,6 +477,12 @@ class Filter extends React.Component {
                 filterState: 2,
                 phoneButtonStyle: { outline: "0", color: "black", padding: "10px 5px" },
                 accessoriesButtonStyle: { backgroundColor: "white", color: "#05a90c", fontWeight: "bold", outline: "0", padding: "10px 5px" }
+            };
+        } else if (searchingResult.props.match.params.type == "searching") {
+            this.state = {
+                filterState: 1,
+                phoneButtonStyle: { backgroundColor: "white", color: "#05a90c", fontWeight: "bold", outline: "0", padding: "10px 5px" },
+                accessoriesButtonStyle: { outline: "0", color: "black", padding: "10px 5px" }
             };
         }
 
@@ -763,6 +751,107 @@ class AccessoriesProducts extends React.Component {
     }
 }
 
+class SearchingProducts extends React.Component {
+
+    /*Lấy giá trị của kết quả trả về và setState khi url là /tim-kiem/dien-thoai?....*/
+    componentDidMount() {
+        var search = window.location.search;
+        axios.get('/tim-kiem/searching' + search).then(result => {
+            searchingResult.setState({
+                productsResult: result.data.products,
+                productNumber: result.data.productsNumber
+            });
+        });
+    }
+
+
+    /*Xử lý sự kiện khi thay đổi thuộc tính lọc theo giá tiền*/
+    changePriceSorting = (event) => {
+        if (event.target.value == "Cao đến thấp") {
+            var flagResult = searchingResult.state.productsResult;
+            for (var i = 0; i < flagResult.length; i++) {
+                for (var j = i + 1; j < flagResult.length; j++) {
+                    if (flagResult[j].giaBan > flagResult[i].giaBan) {
+                        var flag = flagResult[j];
+                        flagResult[j] = flagResult[i];
+                        flagResult[i] = flag;
+                    }
+                }
+            }
+            searchingResult.setState({
+                productsResult: flagResult
+            });
+        } else if (event.target.value == "Thấp đến cao") {
+            var flagResult = searchingResult.state.productsResult;
+            for (var i = 0; i < flagResult.length; i++) {
+                for (var j = i + 1; j < flagResult.length; j++) {
+                    if (flagResult[j].giaBan < flagResult[i].giaBan) {
+                        var flag = flagResult[j];
+                        flagResult[j] = flagResult[i];
+                        flagResult[i] = flag;
+                    }
+                }
+            }
+            searchingResult.setState({
+                productsResult: flagResult
+            });
+        }
+    }
+
+    /*Tăng biến state đánh số trang khi clik vào nút hiển thị thêm sản phẩm*/
+    showMoreProducts = () => {
+        searchingResult.setState(
+            {
+                page: searchingResult.state.page + 1
+            }
+        )
+    }
+
+    render() {
+        return (
+            <div className="col-lg-9 col-md-9 col-sm-8 right-div">
+                <div className="col-xs-12 result">
+
+                    <div className="col-xs-12">
+                        <h4 className="float-left" style={{ margin: "15px 0px" }}>KẾT QUẢ TÌM KIẾM</h4>
+                        <select style={{ margin: "15px 10px", border: "none" }} className="float-right" onChange={this.changePriceSorting}>
+                            <option value="">Sắp xếp giá</option>
+                            <option value="Cao đến thấp">Cao đến thấp</option>
+                            <option value="Thấp đến cao">Thấp đến cao</option>
+                        </select>
+                    </div>
+
+                    <div className="col-xs-12">
+                        {
+                            searchingResult.state.productsResult.length == 0 ?
+                                <NotFound /> :
+                                searchingResult.state.productsResult.map(function (note, index) {
+                                    return (
+                                        index < 12 * searchingResult.state.page ? <Product prds={note} type={note.type} linkClassName="col-md-3 col-sm-4 col-xs-6 prds" key={index} /> : ''
+                                    );
+                                })
+                        }
+                    </div>
+
+                    {
+                        searchingResult.state.productNumber - 12 * searchingResult.state.page > 0 ?
+                            <div className="col-xs-12" style={{ margin: "10px 0px" }}>
+                                <div className="more-products-btn">
+                                    <button type="button" className="btn btn-default" style={{ outline: "0" }} onClick={this.showMoreProducts}>
+                                        Xem thêm {searchingResult.state.productNumber - 12 * searchingResult.state.page} sản phẩm
+                            <span className="glyphicon glyphicon-triangle-bottom"> </span>
+                                    </button>
+                                </div>
+                            </div> :
+                            <div className="col-xs-12" style={{ marginTop: "10px" }}> </div>
+                    }
+
+                </div>
+            </div>
+        );
+    }
+}
+
 /* --------  Component trang hiển thị kết quả tìm kiếm  --------------  */
 class SearchingResult extends React.Component {
 
@@ -779,12 +868,15 @@ class SearchingResult extends React.Component {
     render() {
         return (
             <div className="container searching-result">
-                
                 <Filter />
                 {
                     this.props.match.params.type == "phu-kien" ?
                         <AccessoriesProducts /> :
-                        <PhoneProducts />
+                        this.props.match.params.type == "dien-thoai" ?
+                            <PhoneProducts /> :
+                            this.props.match.params.type == "searching" ?
+                                <SearchingProducts /> :
+                                <NotFound />
                 }
                 
             </div>

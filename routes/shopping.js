@@ -256,8 +256,121 @@ router.get('/gio-hang', function (req, res, next) {
     }
 });
 
-router.post('gio-hang', function (req, res, next) {
+router.post('/gio-hang', function (req, res, next) {
+    var products = req.body.products;
+    var account = req.body.account;
+    var diaChi = req.body.dia_chi;
+    var hoTen = req.body.ho_ten;
+    var sdt = req.body.sdt;
+    var email = req.body.email;
 
+    //Query lấy id người dùng
+    var queryId = "SELECT MaNguoiDung FROM nguoidung WHERE TenDangNhap='" + account + "'"; 
+    connect_db.con.query(queryId, function (err1, result1) {
+        if (err1) {
+            res.json({ errMess: "Đã xảy ra lỗi!" });
+            throw err1;
+        }
+        //Query lấy mã điện thoại và số lượng còn lại của mỗi sản phẩm có trong giỏ hàng
+        var queryPhoneQuantity = "SELECT P.MaDienThoai AS MaSanPham, P.SoLuong FROM dienthoai P INNER JOIN giohang SC ON P.MaDienThoai=SC.MaSanPham AND SC.LoaiSanPham='Điện thoại' AND SC.MaKhachHang=" + result1[0].MaNguoiDung;
+        connect_db.con.query(queryPhoneQuantity, function (err2, result2) {
+            if (err2) {
+                res.json({ errMess: "Đã xảy ra lỗi!" });
+                throw err2;
+            }
+
+            //Query lấy mã phụ kiện và số lượng còn lại của mỗi phụ kiện có trong giỏ hàng
+            var queryAccessoriesQuantity = "SELECT A.MaPhuKien AS MaSanPham, A.SoLuong FROM phukien A INNER JOIN giohang SC ON A.MaPhuKien=SC.MaSanPham AND SC.LoaiSanPham='Phụ kiện' AND SC.MaKhachHang=" + result1[0].MaNguoiDung;
+            connect_db.con.query(queryAccessoriesQuantity, function (err3, result3) {
+                if (err3) {
+                    res.json({ errMess: "Đã xảy ra lỗi!" });
+                    throw err3;
+                }
+
+                //Kiểm tra nếu có sản phẩm nào mà số lượng sản phẩm còn lại trong kho không đủ thì trả về thông báo
+                for (var i = 0; i < products.length; i++) {
+                    if (products[i].LoaiSanPham == "Điện thoại") {
+                        for (var j = 0; j < result2.length; j++) {
+                            if (result2[j].MaSanPham == products[i].MaSanPham && result2[j].SoLuong < products[i].SoLuong) {
+                                var errorQuantity = "Xin lỗi!\nSố lượng sản phẩm '" + products[i].TenSanPham + "' trong kho không đủ."
+                                res.json({ errorQuantity });
+                            }
+                        }
+                    } else if (products[i].LoaiSanPham == "Phụ kiện") {
+                        for (var j = 0; j < result3.length; j++) {
+                            if (result3[j].MaSanPham == products[i].MaSanPham && result3[j].SoLuong < products[i].SoLuong) {
+                                var errorQuantity = "Xin lỗi!\nSố lượng sản phẩm '" + products[i].TenSanPham + "' trong kho không đủ."
+                                res.json({ errorQuantity });
+                            }
+                        }
+                    }
+                }
+
+                //Query insert đơn hàng vào bảng đơn hàng
+                var queryInsertIntoDonHang = "INSERT INTO `donhang` (`MADonHang`, `MaKhachHang`, `DiaChi`, `HoTen`, `SoDienThoai`, `Email`, `NgayDatHang`, `NgayChuyenHang`, `NgayNhanHang`, `TrangThai`, `GhiChu`) VALUES (NULL, '" + result1[0].MaNguoiDung + "', '" + diaChi + "', '" + hoTen + "', '" + sdt + "', '" + email + "', current_timestamp(), NULL, NULL, 'Đang chờ', NULL)";
+                connect_db.con.query(queryInsertIntoDonHang, function (err4, result4) {
+                    if (err4) {
+                        res.json({ errMess: "Đã xảy ra lỗi!" });
+                        throw err4;
+                    }
+
+                    //Lấy id của đơn hàng vừa mới thêm vào
+                    var MaDonHang = result4.insertId;
+                    //Query insert các sản phẩm có trong đơn hàng vào bảng chitietdonhang
+                    //Câu lệnh query
+                    var queryInsertIntoChiTietDonHang = "INSERT INTO `chitietdonhang` (`MADonHang`, `LoaiSanPham`, `MaSanPham`, `Mau`, `GiaBan`, `SoLuong`) VALUES ('" + MaDonHang + "', '" + products[0].LoaiSanPham + "', '" + products[0].MaSanPham + "', NULL, '" + products[0].GiaBan + "', '" + products[0].SoLuong + "')";
+                    //Mỗi vòng for sẽ thêm một sản phẩm vào
+                    for (var i = 1; i < products.length; i++) {
+                        queryInsertIntoChiTietDonHang += ", ('" + MaDonHang + "', '" + products[i].LoaiSanPham + "', '" + products[i].MaSanPham + "', NULL, '" + products[i].GiaBan + "', '" + products[i].SoLuong + "')"
+                    }
+                    connect_db.con.query(queryInsertIntoChiTietDonHang, function (err5, result5) {
+                        if (err5) {
+                            res.json({ errMess: "Đã xảy ra lỗi!" });
+                            throw err5;
+                        }
+
+                        //Query thay đổi số lượng còn lại của các sản phẩm sau khi đặt mua hàng thành công
+                        var queryChangeQuantity = ""; //Biến lưu câu truy vấn
+                        //Với mỗi vòng for biến queryChangeQuantity sẽ thay đổi và thêm vào câu query update
+                        for (var i = 0; i < products.length; i++) {
+                            if (products[i].LoaiSanPham == "Điện thoại") {
+                                for (var j = 0; j < result2.length; j++) {
+                                    if (result2[j].MaSanPham == products[i].MaSanPham) {
+                                        queryChangeQuantity += "UPDATE `dienthoai` SET `SoLuong` = " + (result2[j].SoLuong - products[i].SoLuong) + " WHERE `dienthoai`.`MaDienThoai` = " + products[i].MaSanPham + "; ";
+                                    }
+                                }
+                            } else if (products[i].LoaiSanPham == "Phụ kiện") {
+                                for (var j = 0; j < result3.length; j++) {
+                                    if (result3[j].MaSanPham == products[i].MaSanPham) {
+                                        queryChangeQuantity += "UPDATE `phukien` SET `SoLuong` = " + (result2[j].SoLuong - products[i].SoLuong) + " WHERE `phukien`.`MaPhuKien` = " + products[i].MaSanPham + "; ";
+                                    }
+                                }
+                            }
+                        }
+                        console.log(queryChangeQuantity);
+                        connect_db.con.query(queryChangeQuantity, function (err6, result6) {
+                            if (err6) {
+                                res.json({ errMess: "Đã xảy ra lỗi!" });
+                                throw err6;
+                            }
+
+                            //Query xóa các sản phẩm có trong giỏ hàng của người dùng sau khi mua hàng thành công
+                            var queryDeleteFromGioHang = "DELETE FROM `giohang` WHERE giohang.MaKhachHang=" + result1[0].MaNguoiDung;
+                            connect_db.con.query(queryDeleteFromGioHang, function (err7, result7) {
+                                if (err7) {
+                                    res.json({ errMess: "Đã xảy ra lỗi!" });
+                                    throw err7;
+                                }
+
+                                //Thông báo thành công
+                                res.json({ sucessMess: "Bạn đã mua hàng thành công!\nBạn có thể xem chi tiết trong giỏ hàng." }); 
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    })
 })
 
 module.exports = router;

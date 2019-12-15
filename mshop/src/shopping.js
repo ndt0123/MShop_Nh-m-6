@@ -636,7 +636,16 @@ class Shopping extends React.Component {
                         }
                     })
                 } else if (pathname == "/mua-hang/gio-hang") {
-
+                    axios.post('/mua-hang/gio-hang', { products: paymentShoppingCart.state.shoppingProducts, account: result.data.account, dia_chi: homeNumberInfo + ', ' + districtAddress + ', ' + cityAddress, ho_ten: nameInfo, sdt: phoneNumberInfo, email: email }).then(result1 => {
+                        if (result1.data.errorQuantity) {
+                            alert(result1.data.errorQuantity);
+                        } else if (result1.data.errMess) {
+                            alert(result1.data.errMess);
+                        } else if (result1.data.sucessMess) {
+                            alert(result1.data.sucessMess);
+                            window.location = "http://localhost:3000/";
+                        }
+                    })
                 }
                 
             }

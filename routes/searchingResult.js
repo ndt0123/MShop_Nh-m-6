@@ -4,17 +4,7 @@ var router = express.Router();
 const connect_db = require('../modules/connect_db');
 
 /* ------ Router tìm kiếm điện thoại -------- */
-router.get('/dien-thoai', function (req, res, next) {    
-
-    /*Các biến lưu tài khoản*/
-    var account;
-    var level;
-    if (req.session.username) {
-        account = req.session.username;
-    }
-    if (req.session.level) {
-        level = req.session.level;
-    }
+router.get('/dien-thoai', function (req, res, next) {
 
     /*Các biến xử lý câu truy vấn và kết quả trả về*/
     var phones = [];
@@ -128,7 +118,7 @@ router.get('/dien-thoai', function (req, res, next) {
         }
         phoneNumber = result.length;
 
-        res.json({ phones, phoneNumber, account, level });
+        res.json({ phones, phoneNumber });
 
     });
 
@@ -137,16 +127,6 @@ router.get('/dien-thoai', function (req, res, next) {
 
 /*Router tìm kiếm phụ kiện*/
 router.get('/phu-kien', function (req, res, next) {
-
-    /*Các biến lưu tài khoản*/
-    var account;
-    var level;
-    if (req.session.username) {
-        account = req.session.username;
-    }
-    if (req.session.level) {
-        level = req.session.level;
-    }
 
     /*Các biến xử lý câu truy vấn và kết quả trả về*/
     var accessories = [];
@@ -252,9 +232,112 @@ router.get('/phu-kien', function (req, res, next) {
             }
         }
         accessoriesNumber = result.length;
-        res.json({ accessories, accessoriesNumber, account, level });
+        res.json({ accessories, accessoriesNumber });
 
     });
 });
+
+router.get('/searching', function (req, res, next) {
+    var products = [];
+    var productsNumber = 0;
+
+    var key = req.query.key.trim().toLowerCase();
+    if (key == "phụ kiện") {
+        var queryProduct = "SELECT A.MaPhuKien, A.TenPhuKien, A.GiaBan, A.GiaKhuyenMai, AI.DuongDan FROM phukien A INNER JOIN hinhanhphukien AI ON A.MaPhuKien = AI.MaPhuKien GROUP BY A.MaPhuKien";
+        connect_db.con.query(queryProduct, function (err, result) {
+            if (err) {
+                throw err;
+            }
+            productsNumber = result.length;
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].GiaKhuyenMai == null) {
+                    products.push({
+                        id: result[i].MaPhuKien, ten: result[i].TenPhuKien,
+                        giaBan: result[i].GiaBan, giaGoc: result[i].GiaBan,
+                        hinhAnh: result[i].DuongDan, type: 'phu-kien'
+                    });
+                } else {
+                    products.push({
+                        id: result[i].MaPhuKien, ten: result[i].TenPhuKien,
+                        giaBan: result[i].GiaKhuyenMai, giaGoc: result[i].GiaBan,
+                        hinhAnh: result[i].DuongDan, type: 'phu-kien'
+                    });
+                }
+            }
+            res.json({ products, productsNumber });
+        })
+    } else  if (key == "điện thoại") {
+        var queryProduct = "SELECT P.MaDienThoai, P.TenDienThoai, P.GiaBan, P.GiaKhuyenMai, PI.DuongDan FROM dienthoai P INNER JOIN hinhanhdienthoai PI ON P.MaDienThoai = PI.MaDT GROUP BY P.MaDienThoai";
+        connect_db.con.query(queryProduct, function (err, result) {
+            if (err) {
+                throw err;
+            }
+            productsNumber = result.length;
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].GiaKhuyenMai == null) {
+                    products.push({
+                        id: result[i].MaDienThoai, ten: result[i].TenDienThoai,
+                        giaBan: result[i].GiaBan, giaGoc: result[i].GiaBan,
+                        hinhAnh: result[i].DuongDan, type: 'dien-thoai'
+                    });
+                } else {
+                    products.push({
+                        id: result[i].MaDienThoai, ten: result[i].TenDienThoai,
+                        giaBan: result[i].GiaKhuyenMai, giaGoc: result[i].GiaBan,
+                        hinhAnh: result[i].DuongDan, type: 'dien-thoai'
+                    });
+                }
+            }
+            res.json({ products, productsNumber });
+        })
+    } else {
+        var queryPhoneProducts = "SELECT P.MaDienThoai, P.TenDienThoai, P.GiaBan, P.GiaKhuyenMai, PI.DuongDan FROM dienthoai P INNER JOIN hinhanhdienthoai PI ON P.MaDienThoai = PI.MaDT WHERE P.TenDienThoai LIKE '%" + key + "%' OR P.Hang='" + key + "' GROUP BY P.MaDienThoai";
+        connect_db.con.query(queryPhoneProducts, function (err1, result1) {
+            if (err1) {
+                throw err1;
+            }
+            for (var i = 0; i < result1.length; i++) {
+                if (result1[i].GiaKhuyenMai == null) {
+                    products.push({
+                        id: result1[i].MaDienThoai, ten: result1[i].TenDienThoai,
+                        giaBan: result1[i].GiaBan, giaGoc: result1[i].GiaBan,
+                        hinhAnh: result1[i].DuongDan, type: 'dien-thoai'
+                    });
+                } else {
+                    products.push({
+                        id: result1[i].MaDienThoai, ten: result1[i].TenDienThoai,
+                        giaBan: result1[i].GiaKhuyenMai, giaGoc: result1[i].GiaBan,
+                        hinhAnh: result1[i].DuongDan, type: 'dien-thoai'
+                    });
+                }
+            }
+
+            var queryAccessoriesProducts = "SELECT A.MaPhuKien, A.TenPhuKien, A.GiaBan, A.GiaKhuyenMai, AI.DuongDan FROM phukien A INNER JOIN hinhanhphukien AI ON A.MaPhuKien = AI.MaPhuKien WHERE A.TenPhuKien LIKE '%" + key + "%' OR A.LoaiPhuKien='" + key + "' GROUP BY A.MaPhuKien"
+            connect_db.con.query(queryAccessoriesProducts, function (err2, result2) {
+                if (err2) {
+                    throw err2;
+                }
+                for (var i = 0; i < result2.length; i++) {
+                    if (result2[i].GiaKhuyenMai == null) {
+                        products.push({
+                            id: result2[i].MaPhuKien, ten: result2[i].TenPhuKien,
+                            giaBan: result2[i].GiaBan, giaGoc: result2[i].GiaBan,
+                            hinhAnh: result2[i].DuongDan, type: 'phu-kien'
+                        });
+                    } else {
+                        products.push({
+                            id: result2[i].MaPhuKien, ten: result2[i].TenPhuKien,
+                            giaBan: result2[i].GiaKhuyenMai, giaGoc: result2[i].GiaBan,
+                            hinhAnh: result2[i].DuongDan, type: 'phu-kien'
+                        });
+                    }
+                }
+
+                productsNumber = result1.length + result2.length;
+                res.json({ products, productsNumber });
+            })
+        })
+    }
+})
 
 module.exports = router;
