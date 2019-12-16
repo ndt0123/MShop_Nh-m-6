@@ -4,14 +4,6 @@ var router = express.Router();
 const connect_db = require('../modules/connect_db');
 
 router.get('/dien-thoai', function (req, res, next) {
-    var account;
-    var level;
-    if (req.session.username) {
-        account = req.session.username;
-    }
-    if (req.session.level) {
-        level = req.session.level;
-    }
 
     var detail = [];
     var recommendPrds = [];
@@ -20,7 +12,7 @@ router.get('/dien-thoai', function (req, res, next) {
     var commentLevel2 = [];
 
     if (typeof req.query.id == "undefined") { //Kiểm tra xem url có đúng không (có trường id không)
-        res.json({account, level });
+        res.json({ });
     } else {
         var id = req.query.id;
         var queryDetail = "SELECT * FROM dienthoai INNER JOIN cauhinhdienthoai ON dienthoai.MaDienThoai=cauhinhdienthoai.MaDienThoai WHERE dienthoai.MaDienThoai=" + id;
@@ -29,7 +21,7 @@ router.get('/dien-thoai', function (req, res, next) {
             detail = result;
 
             if (result.length == 0) { //Kiểm tra xem id có trong cơ sở dữ liệu không
-                res.json({ account, level });
+                res.json({  });
             } else {
                 var queryImages = "SELECT * FROM hinhanhdienthoai WHERE MaDT=" + id;
                 connect_db.con.query(queryImages, function (err1, result1) {
@@ -66,7 +58,7 @@ router.get('/dien-thoai', function (req, res, next) {
                                 if (err4) throw err4;
                                 commentLevel2 = result4;
 
-                                res.json({ detail, recommendPrds, images, commentLevel1, commentLevel2, account, level });
+                                res.json({ detail, recommendPrds, images, commentLevel1, commentLevel2 });
                             })
                         })
                     })
@@ -77,14 +69,6 @@ router.get('/dien-thoai', function (req, res, next) {
 });
 
 router.get('/phu-kien', function (req, res, next) {
-    var account;
-    var level;
-    if (req.session.username) {
-        account = req.session.username;
-    }
-    if (req.session.level) {
-        level = req.session.level;
-    }
 
     var detail = [];
     var recommendPrds = [];
@@ -93,7 +77,7 @@ router.get('/phu-kien', function (req, res, next) {
     var commentLevel2 = [];
 
     if (typeof req.query.id == "undefined") { //Kiểm tra xem url có đúng không (có trường id không)
-        res.json({ account, level });
+        res.json({  });
     } else {
         var id = req.query.id;
         var queryDetail = "SELECT * FROM phukien WHERE MaPhuKien=" + id;
@@ -102,7 +86,7 @@ router.get('/phu-kien', function (req, res, next) {
             detail = result;
 
             if (result.length == 0) { //Kiểm tra xem id có trong cơ sở dữ liệu không
-                res.json({ account, level });
+                res.json({  });
             } else {
                 var queryImages = "SELECT * FROM hinhanhphukien WHERE MaPhuKien=" + id;
                 connect_db.con.query(queryImages, function (err1, result1) {
@@ -139,7 +123,7 @@ router.get('/phu-kien', function (req, res, next) {
                                 if (err4) throw err4;
                                 commentLevel2 = result4;
 
-                                res.json({ detail, recommendPrds, images, commentLevel1, commentLevel2, account, level });
+                                res.json({ detail, recommendPrds, images, commentLevel1, commentLevel2 });
                             })
                         })
 
@@ -154,61 +138,56 @@ router.get('/phu-kien', function (req, res, next) {
 
 router.get('/phu-kien/binh-luan', function (req, res, next) {
     var idProduct = req.query.id;
-    var account = req.query.account;
     var content = req.query.content;
 
-    var selectIdAccount = "SELECT MaNguoiDung FROM nguoidung WHERE TenDangNhap = \"" + account + "\""
-    connect_db.con.query(selectIdAccount, function (err1, result1) {
-        if (err1) throw err1;
-        var queryInsertComment = "INSERT INTO `comment` (`IDCmt`, `MaKhachHang`, `LoaiSanPham`, `MaSanPham`, `NoiDung`, `ThoiGian`) VALUES (NULL, '" + result1[0].MaNguoiDung + "', 'Phụ kiện', '" + idProduct + "', '" + content + "', current_timestamp())";
-        connect_db.con.query(queryInsertComment, function (err2, result2) {
-            if (err2) throw err2;
-        })
+    //Id của tài khoản đăng nhập vào
+    var idAccount = req.session.idAccount;
+    //Query thêm bình luận vào cơ sở dữ liệu
+    var queryInsertComment = "INSERT INTO `comment` (`IDCmt`, `MaKhachHang`, `LoaiSanPham`, `MaSanPham`, `NoiDung`, `ThoiGian`) VALUES (NULL, '" + idAccount + "', 'Phụ kiện', '" + idProduct + "', '" + content + "', current_timestamp())";
+    connect_db.con.query(queryInsertComment, function (err2, result2) {
+        if (err2) throw err2;
     })
 });
 
 router.get('/phu-kien/tra-loi', function (req, res, next) {
     var idComment = req.query.id_comment;
-    var account = req.query.account;
     var content = req.query.content;
 
-    var selectIdAccount = "SELECT MaNguoiDung FROM nguoidung WHERE TenDangNhap = \"" + account + "\""
-    connect_db.con.query(selectIdAccount, function (err1, result1) {
-        if (err1) throw err1;
-        var queryInsertComment = "INSERT INTO `comment2` (`IDCmt2`, `IDNguoiDung`, `IDCmt`, `NoiDung`, `ThoiGian`, `LoaiSanPham`) VALUES (NULL, '" + result1[0].MaNguoiDung + "', '" + idComment + "', '" + content + "', current_timestamp(), 'Phụ kiện')";
-        connect_db.con.query(queryInsertComment, function (err2, result2) {
-            if (err2) throw err2;
-        })
+    //Id của tài khoản đăng nhập vào
+    var idAccount = req.session.idAccount;
+
+    //Query thêm bình luận vào cơ sở dữ liệu
+    var queryInsertComment = "INSERT INTO `comment2` (`IDCmt2`, `IDNguoiDung`, `IDCmt`, `NoiDung`, `ThoiGian`, `LoaiSanPham`) VALUES (NULL, '" + idAccount + "', '" + idComment + "', '" + content + "', current_timestamp(), 'Phụ kiện')";
+    connect_db.con.query(queryInsertComment, function (err2, result2) {
+        if (err2) throw err2;
     })
 });
 
 router.get('/dien-thoai/binh-luan', function (req, res, next) {
     var idProduct = req.query.id;
-    var account = req.query.account;
     var content = req.query.content;
 
-    var selectIdAccount = "SELECT MaNguoiDung FROM nguoidung WHERE TenDangNhap = \"" + account + "\""
-    connect_db.con.query(selectIdAccount, function (err1, result1) {
-        if (err1) throw err1;
-        var queryInsertComment = "INSERT INTO `comment` (`IDCmt`, `MaKhachHang`, `LoaiSanPham`, `MaSanPham`, `NoiDung`, `ThoiGian`) VALUES (NULL, '" + result1[0].MaNguoiDung + "', 'Điện thoại', '" + idProduct + "', '" + content + "', current_timestamp())";
-        connect_db.con.query(queryInsertComment, function (err2, result2) {
-            if (err2) throw err2;
-        })
+    //Id của tài khoản đăng nhập vào
+    var idAccount = req.session.idAccount;
+
+    //Query thêm bình luận vào cơ sở dữ liệu
+    var queryInsertComment = "INSERT INTO `comment` (`IDCmt`, `MaKhachHang`, `LoaiSanPham`, `MaSanPham`, `NoiDung`, `ThoiGian`) VALUES (NULL, '" + idAccount + "', 'Điện thoại', '" + idProduct + "', '" + content + "', current_timestamp())";
+    connect_db.con.query(queryInsertComment, function (err2, result2) {
+        if (err2) throw err2;
     })
 });
 
 router.get('/dien-thoai/tra-loi', function (req, res, next) {
     var idComment = req.query.id_comment;
-    var account = req.query.account;
     var content = req.query.content;
 
-    var selectIdAccount = "SELECT MaNguoiDung FROM nguoidung WHERE TenDangNhap = \"" + account + "\""
-    connect_db.con.query(selectIdAccount, function (err1, result1) {
-        if (err1) throw err1;
-        var queryInsertComment = "INSERT INTO `comment2` (`IDCmt2`, `IDNguoiDung`, `IDCmt`, `NoiDung`, `ThoiGian`, `LoaiSanPham`) VALUES (NULL, '" + result1[0].MaNguoiDung + "', '" + idComment + "', '" + content + "', current_timestamp(), 'Điện thoại')";
-        connect_db.con.query(queryInsertComment, function (err2, result2) {
-            if (err2) throw err2;
-        })
+    //Id của tài khoản đăng nhập vào
+    var idAccount = req.session.idAccount;
+
+    //Query thêm bình luận vào cơ sở dữ liệu
+    var queryInsertComment = "INSERT INTO `comment2` (`IDCmt2`, `IDNguoiDung`, `IDCmt`, `NoiDung`, `ThoiGian`, `LoaiSanPham`) VALUES (NULL, '" + idAccount + "', '" + idComment + "', '" + content + "', current_timestamp(), 'Điện thoại')";
+    connect_db.con.query(queryInsertComment, function (err2, result2) {
+        if (err2) throw err2;
     })
 });
 

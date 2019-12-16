@@ -1,4 +1,4 @@
-var createError = require('http-errors');
+﻿var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 var homeRouter = require('./routes/home');
 var accessoriesRouter = require('./routes/accessories');
@@ -26,9 +28,10 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -44,9 +47,6 @@ app.use('/chi-tiet', productDetailRouter);
 app.use('/tim-kiem', searchingResultRouter);
 app.use('/mua-hang', shoppingRouter);
 app.use('/gio-hang', shoppingCartRouter);
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

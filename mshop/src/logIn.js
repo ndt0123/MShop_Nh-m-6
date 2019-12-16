@@ -97,13 +97,13 @@ class LogIn extends React.Component {
 
                 <div className="logIn-with-fb-gg">
                     <div style={{ width: "144px", margin: "auto" }}>
-                        <Link to="">
+                        <Link to="/tai-khoan/facebook">
                             <div className="fb" title="Facebook">
                                 <span className="fa fa-facebook"></span>
                             </div>
                         </Link>
 
-                        <Link to="">
+                        <Link to="/tai-khoan/google">
                             <div className="gg" title="Google">
                                 <span className="fa fa-google"></span>
                             </div>

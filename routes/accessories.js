@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var router = express.Router();
 
 const connect_db = require('../modules/connect_db');
@@ -9,16 +9,7 @@ router.get('/', function (req, res, next) {
     var accessories = [];
     var accessoriesNumber;
 
-    var account;
-    var level;
-    if (req.session.username) {
-        account = req.session.username;
-    }
-    if (req.session.level) {
-        level = req.session.level;
-    }
-
-
+    //query lấy các sản phẩm là phụ kiện
     var queryPhone = "SELECT * FROM phukien INNER JOIN hinhanhphukien ON phukien.MaPhuKien=hinhanhphukien.MaPhuKien GROUP BY phukien.MaPhuKien ORDER BY phukien.MaPhuKien DESC";
     connect_db.con.query(queryPhone, function (err, result, feilds) {
         if (err) throw err;
@@ -39,7 +30,7 @@ router.get('/', function (req, res, next) {
             }
         }
         accessoriesNumber = result.length;
-        res.json({ accessories, accessoriesNumber, account, level });
+        res.json({ accessories, accessoriesNumber });
 
     });
 

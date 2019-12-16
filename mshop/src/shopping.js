@@ -604,18 +604,17 @@ class Shopping extends React.Component {
         }
 
         axios.get("/trang-chu").then(result => {
-            if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
+            if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined" && typeof result.data.idAccount == "undefined") {
                 canSubmit = false;
                 var mess = window.confirm("Bạn cần đăng nhập để có thể mua hàng");
                 if (mess == true) {
                     window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                 }
-            } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
+            } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined" && typeof result.data.idAccount == "undefined") {
                 canSubmit = true;
             }
 
             if (canSubmit) {
-                var search = window.location.search;
                 var pathname = window.location.pathname;
                 if (pathname == "/mua-hang/dien-thoai") {
                     axios.post('/mua-hang/dien-thoai', { id: paymentPhone.state.detail.id, account: result.data.account, so_luong: paymentPhone.state.productsNumber, dia_chi: homeNumberInfo + ', ' + districtAddress + ', ' + cityAddress, ho_ten: nameInfo, sdt: phoneNumberInfo, email: email }).then(result1 => {

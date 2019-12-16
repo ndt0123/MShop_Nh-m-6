@@ -1,5 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 const connect_db = require('../modules/connect_db');
 
@@ -15,6 +17,7 @@ router.post('/dang-nhap', function (req, res, next) {
         if (err) throw err;
 
         if (result.length == 1) {
+            req.session.idAccount = result[0].MaNguoiDung;
             req.session.username = result[0].TenDangNhap;
             req.session.level = result[0].Level;
             res.redirect('/');
@@ -30,7 +33,6 @@ router.post('/dang-ky', function (req, res, next) {
 
     var username_signIn = req.body.username_signIn;
     var password_signIn = req.body.password_signIn;
-    var rePassword_signIn = req.body.rePassword_signIn;
 
     var error = "";
 
@@ -43,6 +45,8 @@ router.post('/dang-ky', function (req, res, next) {
             
             connect_db.con.query(queryInsertAccount, function (err1, result1) {
                 if (err1) throw err1;
+
+                req.session.idAccount = result1.insertId;
                 req.session.username = username_signIn;
                 req.session.level = 1;
                 res.redirect('/');
@@ -56,12 +60,11 @@ router.post('/dang-ky', function (req, res, next) {
 });
 
 router.get('/dang-xuat', function (req, res, next) {
-
+    req.session.idAccount = undefined;
     req.session.username = undefined;
     req.session.level = undefined;
     res.redirect('/');
     res.json({ mes: "Log out" });
-
 });
 
 module.exports = router;

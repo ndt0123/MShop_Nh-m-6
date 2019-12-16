@@ -83,7 +83,6 @@ class Comments extends React.Component {
                     window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                 }
             } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
-               // var content = this.state.valueInputComment1.replace('\n', '<br/>');
                 if (this.state.valueInputComment1.trim() != "") {
                     axios.get(window.location.pathname + '/binh-luan' + window.location.search + '&account=' + result.data.account + '&content=' + this.state.valueInputComment1).then(result => {
 

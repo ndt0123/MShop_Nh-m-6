@@ -9,15 +9,6 @@ router.get('/', function (req, res, next) {
     var phones = [];
     var phoneNumber;
 
-    var account;
-    var level;
-    if (req.session.username) {
-        account = req.session.username;
-    }
-    if (req.session.level) {
-        level = req.session.level;
-    }
-
     var queryPhone = "SELECT * FROM dienthoai INNER JOIN hinhanhdienthoai ON dienthoai.MaDienThoai=hinhanhdienthoai.MaDT GROUP BY dienthoai.MaDienThoai ORDER BY dienthoai.MaDienThoai DESC";
     connect_db.con.query(queryPhone, function (err, result, feilds) {
         if (err) throw err;
@@ -39,7 +30,7 @@ router.get('/', function (req, res, next) {
         }
         phoneNumber = result.length;
 
-        res.json({ phones, phoneNumber, account, level });
+        res.json({ phones, phoneNumber });
 
     });
 

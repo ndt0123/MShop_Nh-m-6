@@ -12,11 +12,15 @@ router.get('/', function (req, res, next) {
 
     var account;
     var level;
+    var idAccount;
     if (req.session.username) {
         account = req.session.username;
     }
     if (req.session.level) {
         level = req.session.level;
+    }
+    if (req.session.idAccount) {
+        idAccount = req.session.idAccount;
     }
 
     var queryPhone = "SELECT * FROM dienthoai INNER JOIN hinhanhdienthoai ON dienthoai.MaDienThoai=hinhanhdienthoai.MaDT GROUP BY dienthoai.MaDienThoai ORDER BY dienthoai.MaDienThoai DESC";
@@ -79,7 +83,7 @@ router.get('/', function (req, res, next) {
                         });
                     }
                 }
-                res.json({ phones, accessories, saleOff, account, level });
+                res.json({ phones, accessories, saleOff, account, level, idAccount });
             });
         });
     });
