@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 07, 2019 lúc 10:55 AM
+-- Thời gian đã tạo: Th12 16, 2019 lúc 05:39 PM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.3.9
 
@@ -117,17 +117,21 @@ CREATE TABLE `chitietdonhang` (
   `LoaiSanPham` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `MaSanPham` int(11) NOT NULL,
   `Mau` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `GiaBan` int(11) NOT NULL
+  `GiaBan` int(11) NOT NULL,
+  `SoLuong` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `chitietdonhang`
 --
 
-INSERT INTO `chitietdonhang` (`MADonHang`, `LoaiSanPham`, `MaSanPham`, `Mau`, `GiaBan`) VALUES
-(1, 'Điện Thoại', 1, 'Trắng', 37990000),
-(1, 'Phụ kiện', 1, 'Đen', 260000),
-(1, 'Phụ kiện', 2, 'Trắng', 375000);
+INSERT INTO `chitietdonhang` (`MADonHang`, `LoaiSanPham`, `MaSanPham`, `Mau`, `GiaBan`, `SoLuong`) VALUES
+(26, 'Điện thoại', 28, NULL, 6490000, 2),
+(27, 'Phụ kiện', 40, NULL, 90000, 1),
+(28, 'Điện thoại', 27, NULL, 5390000, 1),
+(28, 'Phụ kiện', 39, NULL, 90000, 2),
+(29, 'Phụ kiện', 35, NULL, 90000, 1),
+(30, 'Phụ kiện', 40, NULL, 90000, 1);
 
 -- --------------------------------------------------------
 
@@ -163,7 +167,9 @@ INSERT INTO `comment` (`IDCmt`, `MaKhachHang`, `LoaiSanPham`, `MaSanPham`, `NoiD
 (23, 1, 'Điện thoại', '19', 'hay<br/>ho', '2019-12-04 09:33:05'),
 (24, 1, 'Điện thoại', '28', 'hay <br>lắm', '2019-12-04 09:36:53'),
 (25, 1, 'Điện thoại', '19', 'hay thế', '2019-12-04 09:51:45'),
-(26, 1, 'Điện thoại', '13', 'Máy này còn không admin ơi?', '2019-12-04 15:38:24');
+(26, 1, 'Điện thoại', '13', 'Máy này còn không admin ơi?', '2019-12-04 15:38:24'),
+(27, 6, 'Điện thoại', '28', 'Sản phẩm này còn không bạn', '2019-12-16 03:41:06'),
+(28, 6, 'Phụ kiện', '41', 'Sản phẩm rất tốt', '2019-12-16 03:46:21');
 
 -- --------------------------------------------------------
 
@@ -199,7 +205,10 @@ INSERT INTO `comment2` (`IDCmt2`, `IDNguoiDung`, `IDCmt`, `NoiDung`, `ThoiGian`,
 (12, 2, 1, 'Hay vay ban', '2019-12-04 14:48:14', 'Phụ kiện'),
 (13, 1, 10, 'Đây không phải điện thoại bạn nhá!', '2019-12-04 15:01:39', 'Phụ kiện'),
 (14, 1, 26, 'Sản phẩm này bên mình còn nhiều bạn nhé', '2019-12-04 15:38:47', 'Điện thoại'),
-(15, 1, 26, 'Bạn muốn mua với số lượng bao nhiêu vậy', '2019-12-04 15:39:13', 'Điện thoại');
+(15, 1, 26, 'Bạn muốn mua với số lượng bao nhiêu vậy', '2019-12-04 15:39:13', 'Điện thoại'),
+(16, 6, 1, 'Đúng rồi bạn', '2019-12-16 03:37:05', 'Điện thoại'),
+(17, 6, 27, 'Còn bạn nhé!', '2019-12-16 03:41:22', 'Điện thoại'),
+(18, 6, 28, 'Cảm ơn bạn nhiều!', '2019-12-16 03:46:43', 'Phụ kiện');
 
 -- --------------------------------------------------------
 
@@ -236,16 +245,16 @@ INSERT INTO `dienthoai` (`MaDienThoai`, `Hang`, `TenDienThoai`, `SoLuong`, `GiaB
 (16, 'Oppo', 'Oppo A5 2020 4GB-128GB', 50, 5290000, NULL),
 (17, 'Samsung', 'Samsung Galaxy A10', 50, 3090000, NULL),
 (18, 'Oppo', 'OPPO A1k', 50, 3190000, NULL),
-(19, 'Samsung', 'Samsung Galaxy A70', 50, 9290000, 8790000),
+(19, 'Samsung', 'Samsung Galaxy A70', 44, 9290000, 8790000),
 (20, 'Vivo', 'Vivo Y11', 50, 2990000, NULL),
 (21, 'Nokia', 'Nokia 6.1 Plus', 50, 3690000, 3390000),
-(22, 'Vivo', 'Vivo V11i', 50, 5490000, 3490000),
+(22, 'Vivo', 'Vivo V11i', 37, 5490000, 3490000),
 (23, 'Vsmart', 'Vsmart Active 1+', 50, 4590000, 3790000),
 (24, 'Huawei', 'Huawei Y9 (2019)', 50, 4490000, NULL),
-(25, 'Xiaomi', 'Xiaomi Redmi Note 8 4GB-64GB', 50, 4990000, NULL),
-(26, 'Nokia', 'Nokia 8.1', 50, 6590000, 5990000),
-(27, 'Huawei', 'Huawei Nova 3i', 50, 5990000, 5390000),
-(28, 'Xiaomi', 'Xiaomi Redmi Note 8 Pro 6GB-128GB', 50, 6990000, 6490000);
+(25, 'Xiaomi', 'Xiaomi Redmi Note 8 4GB-64GB', 48, 4990000, NULL),
+(26, 'Nokia', 'Nokia 8.1', 48, 6590000, 5990000),
+(27, 'Huawei', 'Huawei Nova 3i', 49, 5990000, 5390000),
+(28, 'Xiaomi', 'Xiaomi Redmi Note 8 Pro 6GB-128GB', 46, 6990000, 6490000);
 
 -- --------------------------------------------------------
 
@@ -260,9 +269,9 @@ CREATE TABLE `donhang` (
   `HoTen` char(255) COLLATE utf8_vietnamese_ci NOT NULL,
   `SoDienThoai` char(10) COLLATE utf8_vietnamese_ci NOT NULL,
   `Email` char(255) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `NgayDatHang` date NOT NULL DEFAULT current_timestamp(),
-  `NgayChuyenHang` date DEFAULT NULL,
-  `NgayNhanHang` date DEFAULT NULL,
+  `NgayDatHang` timestamp NOT NULL DEFAULT current_timestamp(),
+  `NgayChuyenHang` timestamp NULL DEFAULT NULL,
+  `NgayNhanHang` timestamp NULL DEFAULT NULL,
   `TrangThai` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
   `GhiChu` text COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
@@ -272,7 +281,11 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`MADonHang`, `MaKhachHang`, `DiaChi`, `HoTen`, `SoDienThoai`, `Email`, `NgayDatHang`, `NgayChuyenHang`, `NgayNhanHang`, `TrangThai`, `GhiChu`) VALUES
-(1, 2, 'số 1 phố trần vỹ phường mai dịch, Quận Cầu giấy, Hà Nội', 'Đặng Văn Nguyễn', '0985888888', NULL, '2019-11-14', NULL, NULL, 'Đã hủy', NULL);
+(26, 6, 'số 9 lê đức thọ, Quận Nam Từ Liêm, Hà Nội', 'Nguyễn Duy Tâm', '0965923824', 'ndt012399@gmail.com', '2019-12-16 03:57:59', NULL, NULL, 'Đang chờ', NULL),
+(27, 6, 'số 125, Quận Tây Hồ, Hà Nội', 'Nguyễn Duy Tâm', '0965923824', 'ndt012399@gmail.com', '2019-12-16 03:59:09', NULL, NULL, 'Đang chờ', NULL),
+(28, 6, 'sdfds df , Quận Thanh Xuân, Hà Nội', 'Nguyễn Duy Tâm', '0965923824', 'ndt012399@gmail.com', '2019-12-16 04:10:28', NULL, NULL, 'Đang chờ', NULL),
+(29, 19, 'dgfdsg g ds, Quận Hoàng Mai, Hà Nội', 'Nguyễn Duy Tâm', '0965923824', 'ndt012399@gmail.com', '2019-12-16 04:14:46', NULL, NULL, 'Đang chờ', NULL),
+(30, 19, 'hhhkjk  kjhh  j, Quận Nam Từ Liêm, Hà Nội', 'Nguyễn Duy Tâm', '0965923824', 'ndt012399@gmail.com', '2019-12-16 04:21:06', NULL, NULL, 'Đang chờ', NULL);
 
 -- --------------------------------------------------------
 
@@ -286,6 +299,17 @@ CREATE TABLE `giohang` (
   `LoaiSanPham` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `MaKhachHang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `giohang`
+--
+
+INSERT INTO `giohang` (`MaGioHang`, `MaSanPham`, `LoaiSanPham`, `MaKhachHang`) VALUES
+(18, 13, 'Điện thoại', 6),
+(21, 27, 'Điện thoại', 19),
+(25, 18, 'Điện thoại', 19),
+(26, 25, 'Phụ kiện', 19),
+(27, 2, 'Điện thoại', 19);
 
 -- --------------------------------------------------------
 
@@ -412,19 +436,7 @@ INSERT INTO `hinhanhdienthoai` (`MaDT`, `DuongDan`) VALUES
 (28, '../images/phones/637060441292308282_xiaomi-redmi-note-8-pro-den-2.png.jpeg'),
 (28, '../images/phones/637060441290718374_xiaomi-redmi-note-8-pro-den-3.png.jpeg'),
 (28, '../images/phones/637060465257853242_xiaomi-redmi-note-8-pro-den-4.png.jpeg'),
-(28, '../images/phones/637060465256933289_xiaomi-redmi-note-8-pro-den-5.png.jpeg'),
-(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-add-600x600.jpg'),
-(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-1-1-fix3.jpg'),
-(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-3-1-fix2.jpg'),
-(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-2-1.jpg'),
-(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-4-1.jpg'),
-(9, '../images/phones/cap-micro-1m-esaver-ds118br-tb-avatar-1-fix-600x600.jpg'),
-(9, '../images/phones/cap-micro-usb-1m-esaver-ds118-tb-xanh-duong-1-1.jpg'),
-(18, '../images/phones/tai-nghe-ep-awei-q7ni-1-2-600x600.jpg'),
-(18, '../images/phones/tai-nghe-ep-awei-q7ni9.jpg'),
-(18, '../images/phones/tai-nghe-ep-awei-q7ni8.jpg'),
-(18, '../images/phones/tai-nghe-ep-awei-q7ni2.jpg'),
-(18, '../images/phones/tai-nghe-ep-awei-q7ni5.jpg');
+(28, '../images/phones/637060465256933289_xiaomi-redmi-note-8-pro-den-5.png.jpeg');
 
 -- --------------------------------------------------------
 
@@ -633,7 +645,7 @@ CREATE TABLE `nguoidung` (
   `TenDangNhap` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `Email` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `SDT` varchar(11) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `Password` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
+  `Password` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `Level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -648,7 +660,9 @@ INSERT INTO `nguoidung` (`MaNguoiDung`, `TenNguoiDung`, `TenDangNhap`, `Email`, 
 (4, 'Văn Nguyễn Đặng', 'vndang', 'vndang@vl.com', '0989123453', '12345678', 2),
 (5, 'Văn Văn Văn', 'vanvanvan', 'vvvan@vl.com', '0989123457', '12345678', 2),
 (6, NULL, 'tam0123', NULL, NULL, '17021009', 1),
-(17, NULL, 'ngu', NULL, NULL, '8888', 1);
+(17, NULL, 'ngu', NULL, NULL, '8888', 1),
+(18, NULL, 'tam01231999', NULL, NULL, '1234567890', 1),
+(19, NULL, 'nguyendv9999', NULL, NULL, '000000000', 1);
 
 -- --------------------------------------------------------
 
@@ -672,7 +686,7 @@ CREATE TABLE `phukien` (
 --
 
 INSERT INTO `phukien` (`MaPhuKien`, `LoaiPhuKien`, `TenPhuKien`, `SoLuong`, `GiaBan`, `GiaKhuyenMai`, `Hang`, `ThongTin`) VALUES
-(1, 'Sạc dự phòng', 'Pin sạc dự phòng 7.500 mAh eSaver LA A33 Đen', 3, 400000, 260000, 'eSaver', 'Thiết kế gọn gàng, màu sắc đẹp mắt.\r\nDễ dàng kiểm tra lại được dung lượng pin còn lại trong sạc.\r\nSử dụng lõi pin Li-Ion an toàn.\r\nSạc được cho mọi điện thoại và máy tính bảng.\r\nBộ sản phẩm gồm: pin sạc.'),
+(1, 'Sạc dự phòng', 'Pin sạc dự phòng 7.500 mAh eSaver LA A33 Đen', 36, 400000, 260000, 'eSaver', 'Thiết kế gọn gàng, màu sắc đẹp mắt.\r\nDễ dàng kiểm tra lại được dung lượng pin còn lại trong sạc.\r\nSử dụng lõi pin Li-Ion an toàn.\r\nSạc được cho mọi điện thoại và máy tính bảng.\r\nBộ sản phẩm gồm: pin sạc.'),
 (2, 'Sạc dự phòng', 'Pin sạc dự phòng 10.000 mAh Xmobile Gram 4 Xanh Navy', 50, 500000, 375000, 'Xmobile', 'Thiết kế đẹp mắt, nhỏ gọn dễ mang theo.\r\nSạc 4 lần thiết bị pin dưới 1.500 mAh, 2 lần dưới 3.500 mAh.\r\nSử dụng lõi pin Li-Ion an toàn.\r\nSạc được cho mọi điện thoại và máy tính bảng.\r\nBộ sản phẩm gồm: pin sạc.'),
 (3, 'Sạc dự phòng', 'Pin sạc dự phòng 10.000 mAh Xmobile Gram 4 Dull Dog Xanh lá', 50, 500000, 400000, 'Xmobile', 'Thiết kế đẹp mắt, màu sắc trẻ trung, nhỏ gọn dễ mang theo.\r\nSạc 4 lần thiết bị pin dưới 1.500 mAh, 2 lần dưới 3.500 mAh.\r\nSử dụng lõi pin Li-Ion an toàn.\r\nSạc được cho mọi điện thoại và máy tính bảng.\r\nBộ sản phẩm gồm: pin sạc.'),
 (4, 'Sạc dự phòng', 'Pin sạc dự phòng Polymer 10.000 mAh Type C eSaver PJ JP106S', 50, 600000, 450000, 'eSaver', 'Thiết kế vỏ nhôm chắc chắn, màu sắc trang nhã.\r\nSử dụng lõi pin Polymer chất lượng cao, tăng khả năng dùng được lâu và an toàn.\r\nTrang bị thêm cổng ra/vào Type-C thích hợp cho các thiết bị có cổng kết nối Type-C.\r\nTương thích với nhiều thiết bị điện thoại, máy tính bảng,...'),
@@ -706,12 +720,12 @@ INSERT INTO `phukien` (`MaPhuKien`, `LoaiPhuKien`, `TenPhuKien`, `SoLuong`, `Gia
 (32, 'Gậy selfie', 'Gậy chụp ảnh Xmobile Hình Kitty CSA003', 50, 90000, NULL, NULL, 'Thân gậy tạo kiểu với biểu tượng Kitty hồng dễ thương.\r\nĐầu gắn điện thoại lạ mắt nhưng rất dễ sử dụng.\r\nPhù hợp với nhiều dòng điện thoại dưới 6 inch khác nhau.\r\nKhông cần hẹn giờ, chỉ cần ấn nút trên thân gậy để chụp ảnh.\r\nĐộ dài gậy lên đến 100 cm, chụp nhóm nhiều người dễ hơn.\r\nĐầu gậy có thể gập mở góc 270 độ tùy bạn lựa chọn.\r\nXuất xứ sản phẩm: Trung Quốc.'),
 (33, 'Gậy selfie', 'Gậy chụp ảnh Bluetooth Tripod Xmobile K06 Đen', 50, 300000, NULL, NULL, 'Gậy kết nối Bluetooth với điện thoại để chụp ảnh.\r\nThiết kế nhỏ gọn nhưng cứng cáp và vô cùng tiện lợi, thân gậy có thể kéo dài đến 63 cm.\r\nChân đế có thể mở rộng 3 chân và có thể đặt đứng giúp việc chụp ảnh dễ dàng hơn.\r\nNút chụp kết nối Bluetooth có thể tháo rời, tiện lợi sefie khi đặt điện thoại ở xa.\r\nĐầu gậy có thể xoay 360 độ, giúp chụp nhiều góc khác nhau dễ dàng.\r\nSử dụng được cho điện thoại Android 4.3 và iOS 5.1 trở lên có màn hình từ 6 inch trở xuống.'),
 (34, 'Ốp lưng', 'Ốp lưng iPhone XS Max Nhựa dẻo Water printing TPU MEEKER TSKB415 Xinh đẹp', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
-(35, 'Ốp lưng', 'Ốp lưng iPhone XS Max Nhựa dẻo Sandy printing TKS-515 MEEKER Tricolor', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
-(36, 'Ốp lưng', 'Ốp lưng iPhone 7/8+ Nhựa dẻo IMD Printing MEEKER TSKB517 Gấu thỏ', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
+(35, 'Ốp lưng', 'Ốp lưng iPhone XS Max Nhựa dẻo Sandy printing TKS-515 MEEKER Tricolor', 49, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
+(36, 'Ốp lưng', 'Ốp lưng iPhone 7/8+ Nhựa dẻo IMD Printing MEEKER TSKB517 Gấu thỏ', 48, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
 (37, 'Ốp lưng', 'Ốp lưng iPhone 7/8+ Nhựa dẻo Water printing TPU MEEKER TSKB089 No', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
-(38, 'Ốp lưng', '\r\nỐp lưng iPhone 7/8+ Nhựa dẻo Water printing TPU MEEKER TSKB089 Yes', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
-(39, 'Ốp lưng', 'Ốp lưng Oppo A9 Nhựa dẻo Sandy printing TKS-515 MEEKER TSKA288 Thỏ', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy '),
-(40, 'Ốp lưng', 'Ốp lưng Oppo A9 Nhựa dẻo New jelly TKS-511 MEEKER Đen', 50, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy '),
+(38, 'Ốp lưng', '\r\nỐp lưng iPhone 7/8+ Nhựa dẻo Water printing TPU MEEKER TSKB089 Yes', 47, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy'),
+(39, 'Ốp lưng', 'Ốp lưng Oppo A9 Nhựa dẻo Sandy printing TKS-515 MEEKER TSKA288 Thỏ', 48, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy '),
+(40, 'Ốp lưng', 'Ốp lưng Oppo A9 Nhựa dẻo New jelly TKS-511 MEEKER Đen', 45, 90000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy '),
 (41, 'Ốp lưng', 'Ốp lưng Oppo A9 Nhựa dẻo Luggage style TKS-510 MEEKER Xanh Olive', 50, 100000, NULL, NULL, 'Kiểu dáng thời trang và đẹp mắt\r\nThiết kế vừa vặn và ôm sát thân máy\r\nDễ dàng tháo/lắp ốp vào máy ');
 
 --
@@ -768,13 +782,13 @@ ALTER TABLE `phukien`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `IDCmt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `IDCmt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `comment2`
 --
 ALTER TABLE `comment2`
-  MODIFY `IDCmt2` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `IDCmt2` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `dienthoai`
@@ -786,19 +800,19 @@ ALTER TABLE `dienthoai`
 -- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `MADonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MADonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `giohang`
 --
 ALTER TABLE `giohang`
-  MODIFY `MaGioHang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaGioHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `MaNguoiDung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaNguoiDung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `phukien`
