@@ -57,7 +57,7 @@ class Product extends React.Component {
         );
     }
     onClickProduct = () => {
-        if (window.location.pathname == '/chi-tiet/' + this.props.type) {
+        if (window.location.pathname === '/chi-tiet/' + this.props.type) {
             window.location.assign('/chi-tiet/' + this.props.type + '?id=' + this.props.prds.id);
         }
     }
@@ -70,7 +70,7 @@ class Product extends React.Component {
                     <h5 className="col-xs-12 products-title" style={this.state.h5Style}>{this.props.prds.ten}</h5>
                     <b className="col-xs-6" style={this.state.bStyle}>{this.props.prds.giaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + 'đ'}</b>
                     {
-                        this.props.prds.giaBan != this.props.prds.giaGoc ?
+                        this.props.prds.giaBan !== this.props.prds.giaGoc ?
                             <strike className="col-xs-6">{this.props.prds.giaGoc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + 'đ'}</strike> : ''
                     }
                     

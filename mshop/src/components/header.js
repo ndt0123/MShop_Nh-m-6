@@ -1,4 +1,4 @@
-﻿import React, { Component } from 'react';
+﻿import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
@@ -15,12 +15,12 @@ class Header extends React.Component {
 
     componentDidMount() {
         axios.get("/trang-chu").then(result => {
-            if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
+            if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined" && typeof result.data.idAccount == "undefined") {
                 this.setState({
                     userName: "",
                     level: 0
                 })
-            } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
+            } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined" && typeof result.data.idAccount != "undefined") {
                 this.setState({
                     userName: result.data.account,
                     level: result.data.level
@@ -32,7 +32,7 @@ class Header extends React.Component {
     //Sự kiện click vào nút đăng xuất
     onClickLogOut = () => {
         var mess = window.confirm("Bạn có chắc muốn đăng xuất?");
-        if (mess == true) {
+        if (mess === true) {
             axios.get('/tai-khoan/dang-xuat').then(result => {
                 window.location = "http://localhost:3000/";
             });
@@ -41,10 +41,10 @@ class Header extends React.Component {
 
     //Sự kiện click vào nút giỏ hàng
     onClickShoppingCartBtn = (event) => {
-        if (this.state.userName == "") {
+        if (this.state.userName === "") {
             event.preventDefault();
             var mess = window.confirm("Bạn cần đăng nhập để có thể thực hiện tác vụ này.");
-            if (mess == true) {
+            if (mess === true) {
                 window.location = "http://localhost:3000/tai-khoan/dang-nhap";
             }
         }
@@ -59,7 +59,7 @@ class Header extends React.Component {
 
     //Sự kiên click vào nút tìm kiếm
     onClickSearchingButton = (event) => {
-        if (this.state.keySearching.trim() == "") {
+        if (this.state.keySearching.trim() === "") {
             event.preventDefault();
         }
     }
@@ -75,7 +75,7 @@ class Header extends React.Component {
 
                     <div className="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-small-screen" style={{ top: "50%", transform: "translateY(6px)", paddingLeft: "0px" }}>
                         {
-                            this.state.userName == "" ?
+                            this.state.userName === "" ?
                                 <Link to="/tai-khoan/dang-nhap" className="float-right right-btn" title="Đăng nhập">
                                     Đăng nhập
 		                        </Link>
@@ -98,7 +98,7 @@ class Header extends React.Component {
 
                     <div className="col-lg-3 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-large-screen" style={{ top: "50%", transform: "translateY(6px)", paddingLeft: "0px" }}>
                         {
-                            this.state.userName == "" ?
+                            this.state.userName === "" ?
                                 <Link to="/tai-khoan/dang-nhap" className="float-right right-btn" title="Đăng nhập">
                                     Đăng nhập
 		                        </Link>

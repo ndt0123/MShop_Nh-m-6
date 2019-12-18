@@ -23,13 +23,13 @@ class ShoppingProducts extends React.Component {
                             <div className="col-xs-12 prds-detail" key={index}>
                                 <div className="col-md-5 col-sm-5 col-xs-4">
                                     {
-                                        note.LoaiSanPham == "Điện thoại" ?
+                                        note.LoaiSanPham === "Điện thoại" ?
                                             <Link to={"/chi-tiet/dien-thoai?id=" + note.MaSanPham} >
                                                 <img src={note.DuongDan} className="col-md-3 col-sm-4 col-xs-5" />
                                                 <p className="col-md-9 col-sm-8 col-xs-7" style={{ textAlign: "left", padding: "0px 15px" }}>{note.TenSanPham}</p>
                                             </Link>
                                             :
-                                            note.LoaiSanPham == "Phụ kiện" ?
+                                            note.LoaiSanPham === "Phụ kiện" ?
                                                 <Link to={"/chi-tiet/phu-kien?id=" + note.MaSanPham} >
                                                     <img src={note.DuongDan} className="col-md-3 col-sm-4 col-xs-5" />
                                                     <p className="col-md-9 col-sm-8 col-xs-7" style={{ textAlign: "left", padding: "0px 15px" }}>{note.TenSanPham}</p>
@@ -47,7 +47,7 @@ class ShoppingProducts extends React.Component {
                                     <p style={{
                                         color: "red", cursor: "pointer", border: "solid 1px red", width: "72px", borderRadius: "3px", margin: "15px auto" }} title="Xóa khỏi giỏ hàng" onClick={() => {
                                         var mess = window.confirm("Bạn có chăc muốn xóa sản phẩm khỏi giỏ hàng không?");
-                                        if (mess == true) {
+                                        if (mess === true) {
                                             axios.get('/gio-hang/xoa?id=' + note.MaGioHang).then(result => { })
                                             axios.get('/gio-hang').then(result => {
                                                 shoppingCart.setState({
@@ -91,12 +91,12 @@ class ShippingProducts extends React.Component {
                             <div className="col-xs-12 prds-detail" key={index}>
                                 <div className="col-xs-4">
                                     {
-                                        note.LoaiSanPham == "Điện thoại" ?
+                                        note.LoaiSanPham === "Điện thoại" ?
                                             <Link to={"/chi-tiet/dien-thoai?id=" + note.MaSanPham} >
                                                 <p className="col-md-9 col-sm-8 col-xs-7" style={{ textAlign: "left" }}>{note.TenSanPham}</p>
                                             </Link>
                                             :
-                                            note.LoaiSanPham == "Phụ kiện" ?
+                                            note.LoaiSanPham === "Phụ kiện" ?
                                                 <Link to={"/chi-tiet/phu-kien?id=" + note.MaSanPham} >
                                                     <p className="col-md-9 col-sm-8 col-xs-7" style={{ textAlign: "left" }}>{note.TenSanPham}</p>
                                                 </Link>
@@ -143,12 +143,12 @@ class BoughtProducts extends React.Component {
                             <div className="col-xs-12 prds-detail" key={index}>
                                 <div className="col-xs-5">
                                     {
-                                        note.LoaiSanPham == "Điện thoại" ?
+                                        note.LoaiSanPham === "Điện thoại" ?
                                             <Link to={"/chi-tiet/dien-thoai?id=" + note.MaSanPham} >
                                                 <p className="col-md-9 col-sm-8 col-xs-7" style={{ textAlign: "left" }}>{note.TenSanPham}</p>
                                             </Link>
                                             :
-                                            note.LoaiSanPham == "Phụ kiện" ?
+                                            note.LoaiSanPham === "Phụ kiện" ?
                                                 <Link to={"/chi-tiet/phu-kien?id=" + note.MaSanPham} >
                                                     <p className="col-md-9 col-sm-8 col-xs-7" style={{ textAlign: "left" }}>{note.TenSanPham}</p>
                                                 </Link>
@@ -219,7 +219,7 @@ class ShoppingCart extends React.Component {
                         : ""
                 }
                 {
-                    this.state.shoppingProducts.length == 0 && this.state.shippingProducts.length == 0 && this.state.boughtProducts.length == 0 ?
+                    this.state.shoppingProducts.length === 0 && this.state.shippingProducts.length === 0 && this.state.boughtProducts.length === 0 ?
                         <h3>Bạn không có sản phẩm nào trong giỏ hàng</h3>
                         : ""
                 }

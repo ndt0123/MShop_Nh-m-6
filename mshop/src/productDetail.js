@@ -26,7 +26,7 @@ class Images extends React.Component {
                     {
                         this.props.images.map(function (note, index) {
                             return (
-                                index == 0 ?
+                                index === 0 ?
                                     <li data-target="#phoneImgCarousel" data-slide-to={index} className="active" key={index}></li> :
                                     <li data-target="#phoneImgCarousel" data-slide-to={index} key={index}></li>
                             );
@@ -38,7 +38,7 @@ class Images extends React.Component {
                     {
                         this.props.images.map(function (note, index) {
                             return (
-                                index == 0 ?
+                                index === 0 ?
                                     <div className="item active" key={index}>
                                         <img src={note.DuongDan} alt="" />
                                     </div> :
@@ -79,11 +79,11 @@ class Comments extends React.Component {
         axios.get("/trang-chu").then(result => {
             if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
                 var mess = window.confirm("Bạn cần đăng nhập để có thể bình luận.");
-                if (mess == true) {
+                if (mess === true) {
                     window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                 }
             } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
-                if (this.state.valueInputComment1.trim() != "") {
+                if (this.state.valueInputComment1.trim() !== "") {
                     axios.get(window.location.pathname + '/binh-luan' + window.location.search + '&account=' + result.data.account + '&content=' + this.state.valueInputComment1).then(result => {
 
                     })
@@ -129,7 +129,7 @@ class Comments extends React.Component {
                                                 </div>
                                                 <strong className="float-left name-user">{note1.TenDangNhap}</strong>
                                                 {
-                                                    note1.Level == 2 ?
+                                                    note1.Level === 2 ?
                                                         <p className="float-left admin">Quản trị viên</p> : ''
                                                 }
                                             </div>
@@ -151,7 +151,7 @@ class Comments extends React.Component {
                                             {
                                                 comments.props.commentLevel2.map(function (note2, index2) {
                                                     return (
-                                                        note2.IDCmt == note1.IDCmt ?
+                                                        note2.IDCmt === note1.IDCmt ?
                                                             <div className="col-xs-12 reply-content" key={index2}>
                                                                 <div className="col-xs-12 user-comment">
                                                                     <div className="float-left avatar-user">
@@ -159,7 +159,7 @@ class Comments extends React.Component {
                                                                     </div>
                                                                     <strong className="float-left name-user">{note2.TenDangNhap}</strong>
                                                                     {
-                                                                        note2.Level == 2 ?
+                                                                        note2.Level === 2 ?
                                                                             <p className="float-left admin">Quản trị viên</p> : ''
                                                                     }
                                                                 </div>
@@ -188,12 +188,12 @@ class Comments extends React.Component {
                                                         axios.get("/trang-chu").then(result => {
                                                             if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
                                                                 var mess = window.confirm("Bạn cần đăng nhập để có thể bình luận.");
-                                                                if (mess == true) {
+                                                                if (mess === true) {
                                                                     window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                                                                 }
                                                             } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
                                                                 // var content = document.getElementById('comment2_' + index1).value.replace('\n', '<br/>');
-                                                                if (content.trim() != "") {
+                                                                if (content.trim() !== "") {
                                                                     axios.get(window.location.pathname + '/tra-loi?id_comment=' + id_comment + '&account=' + result.data.account + '&content=' + content).then(result => {
 
                                                                     })
@@ -286,7 +286,7 @@ class PhoneDetail extends React.Component {
         return (
             <div>
                 {
-                    this.state.errorUrl == true ?
+                    this.state.errorUrl === true ?
                         <NotFound />
                         :
                         <div>
@@ -368,7 +368,7 @@ class PhoneDetail extends React.Component {
                                             axios.get("/trang-chu").then(result => {
                                                 if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
                                                     var mess = window.confirm("Bạn cần đăng nhập để có thể thực hiện tác vụ này.");
-                                                    if (mess == true) {
+                                                    if (mess === true) {
                                                         window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                                                     }
                                                 } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
@@ -392,7 +392,7 @@ class PhoneDetail extends React.Component {
                                             axios.get("/trang-chu").then(result => {
                                                 if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
                                                     var mess = window.confirm("Bạn cần đăng nhập để có thể mua hàng.");
-                                                    if (mess == true) {
+                                                    if (mess === true) {
                                                         window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                                                     }
                                                 } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
@@ -451,7 +451,7 @@ class AccessoriesDetail extends React.Component {
         return (
             <div>
                 {
-                    this.state.errorUrl == true ?
+                    this.state.errorUrl === true ?
                         <NotFound />
                         :
                         <div>
@@ -500,7 +500,7 @@ class AccessoriesDetail extends React.Component {
                                             axios.get("/trang-chu").then(result => {
                                                 if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
                                                     var mess = window.confirm("Bạn cần đăng nhập để có thể thực hiện tác vụ này.");
-                                                    if (mess == true) {
+                                                    if (mess === true) {
                                                         window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                                                     }
                                                 } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
@@ -524,7 +524,7 @@ class AccessoriesDetail extends React.Component {
                                             axios.get("/trang-chu").then(result => {
                                                 if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
                                                     var mess = window.confirm("Bạn cần đăng nhập để có thể mua hàng.");
-                                                    if (mess == true) {
+                                                    if (mess === true) {
                                                         window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                                                     }
                                                 } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
@@ -549,9 +549,9 @@ class ProductDetail extends React.Component {
         return (
             <div>
                 {
-                    this.props.match.params.type == "phu-kien" ?
+                    this.props.match.params.type === "phu-kien" ?
                         <AccessoriesDetail /> :
-                        this.props.match.params.type == "dien-thoai" ?
+                        this.props.match.params.type === "dien-thoai" ?
                         <PhoneDetail /> : ''
                 }
             </div>

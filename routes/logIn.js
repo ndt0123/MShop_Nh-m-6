@@ -18,7 +18,7 @@ router.post('/dang-nhap', function (req, res, next) {
 
         if (result.length == 1) {
             req.session.idAccount = result[0].MaNguoiDung;
-            req.session.username = result[0].TenDangNhap;
+            req.session.username = result[0].TenNguoiDung;
             req.session.level = result[0].Level;
             res.redirect('/');
         } else {
@@ -41,7 +41,7 @@ router.post('/dang-ky', function (req, res, next) {
         if (err) throw err;
 
         if (result.length == 0) {            
-            var queryInsertAccount = "INSERT INTO `nguoidung` (`MaNguoiDung`, `TenNguoiDung`, `TenDangNhap`, `Email`, `SDT`, `Password`, `Level`) VALUES (NULL, NULL, '" + username_signIn + "', NULL, NULL, '" + password_signIn + "', '1')";
+            var queryInsertAccount = "INSERT INTO `nguoidung` (`MaNguoiDung`, `TenNguoiDung`, `TenDangNhap`, `Email`, `SDT`, `Password`, `Level`) VALUES (NULL, '" + username_signIn + "', '" + username_signIn + "', NULL, NULL, '" + password_signIn + "', '1')";
             
             connect_db.con.query(queryInsertAccount, function (err1, result1) {
                 if (err1) throw err1;
@@ -66,5 +66,56 @@ router.get('/dang-xuat', function (req, res, next) {
     res.redirect('/');
     res.json({ mes: "Log out" });
 });
+
+router.post('/dang-nhap/fb', function(req,res, next){
+    var user_name = req.body.user_name;
+    var user_account = req.body.user_name;
+    var query = "SELECT * FROM nguoidung WHERE TenDangNhap = '" + user_account + "'";
+    connect_db.con.query(query, function(err, result, feilds) {
+        if(err) throw err;
+        if(result.length==0) {
+            var queryInsertAccount = "INSERT INTO `nguoidung` (`MaNguoiDung`, `TenNguoiDung`, `TenDangNhap`, `Email`, `SDT`, `Password`, `Level`) VALUES (NULL, '" + user_name +"', '"+user_account+ "', NULL , NULL, NULL, '1')";
+            connect_db.con.query(queryInsertAccount, function (err1, result1) {
+                if (err1) throw err1;
+                req.session.username = user_account;
+                req.session.idAccount = result1.insertId;
+                req.session.level = 1;
+                res.redirect('/');
+            })
+        }
+        else {
+            req.session.username = user_account;
+            req.session.level = 1;
+            req.session.idAccount = result[0].MaNguoiDung;
+            res.redirect('/');
+        }
+    })
+})
+
+router.post('/dang-nhap/gg', function(req,res, next){
+    var user_name = req.body.user_name;
+    var user_account = req.body.user_name;
+    var user_email = req.body.user_email;
+    var query = "SELECT * FROM nguoidung WHERE TenDangNhap = '" + user_account + "'";
+    connect_db.con.query(query, function(err, result, feilds) {
+        if(err) throw err;
+        if(result.length==0) {
+            var queryInsertAccount = "INSERT INTO `nguoidung` (`MaNguoiDung`, `TenNguoiDung`, `TenDangNhap`, `Email`, `SDT`, `Password`, `Level`) VALUES (NULL, '" + user_name +"', '"+user_account+ "', '" +user_email+ "' , NULL, NULL, '1')";
+            connect_db.con.query(queryInsertAccount, function (err1, result1) {
+                if (err1) throw err1;
+                req.session.username = user_account;
+                req.session.idAccount = result1.insertId;
+                req.session.level = 1;
+                res.redirect('/');
+            })
+        }
+        else {
+            req.session.username = user_account;
+            req.session.level = 1;
+            req.session.idAccount = result[0].MaNguoiDung;
+            res.redirect('/');
+        }
+    })
+})
 
 module.exports = router;

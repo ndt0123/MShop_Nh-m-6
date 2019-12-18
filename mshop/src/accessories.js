@@ -93,7 +93,7 @@ class AccessoriesType extends React.Component {
 class Filter extends React.Component {
 
     changeFilter = (event) => {
-        if (event.target.value == "Cao đến thấp") {
+        if (event.target.value === "Cao đến thấp") {
             var flagResult = accessories.state.accessories;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -107,7 +107,7 @@ class Filter extends React.Component {
             accessories.setState({
                 accessories: flagResult
             });
-        } else if (event.target.value == "Thấp đến cao") {
+        } else if (event.target.value === "Thấp đến cao") {
             var flagResult = accessories.state.accessories;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {

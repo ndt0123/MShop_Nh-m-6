@@ -92,10 +92,12 @@ div.more-products-btn button:hover {
     text-align: center;
     border-radius: 3px;
     overflow: hidden;
-    width: 80px;
+    width: 100px;
     padding: 3px;
     margin: 3px;
     border: solid 1px white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .box-header .header {
@@ -950,3 +952,34 @@ p.error-input-info {
 strike {
     color: #8e8e8e;
 }
+.btnFacebook { 
+    width: 180px;
+    height:35px;  
+    border-radius: 4px;
+    background: #3b5998;
+    color:white;
+    border:0px transparent;  
+    text-align: center;
+    margin:5px;
+    display: inline-block;
+  }
+  .btnGoogle { 
+    margin:5px;
+    width: 180px;
+    height:35px;
+    border-radius: 4px;
+    background: #db3236;
+    color:white;
+    border:0px transparent;
+    text-align: center;
+    float: right;
+    font-size: 25px;
+  }
+  .btnFacebook:hover {
+    background: #3b5998;
+    opacity: 0.6;
+  }
+  .btnGoogle:hover {
+    background: #db3236;
+    opacity: 0.6;
+  }

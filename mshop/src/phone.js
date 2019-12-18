@@ -55,7 +55,7 @@ class PhoneCompanies extends React.Component {
 class PriceFilter extends React.Component {
 
     changeFilter(event) {
-        if (event.target.value == "Cao đến thấp") {
+        if (event.target.value === "Cao đến thấp") {
             var flagResult = phones.state.phones;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -69,7 +69,7 @@ class PriceFilter extends React.Component {
             phones.setState({
                 phones: flagResult
             });
-        } else if (event.target.value == "Thấp đến cao") {
+        } else if (event.target.value === "Thấp đến cao") {
             var flagResult = phones.state.phones;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {

@@ -12,16 +12,16 @@ function getDataFromPhoneFilter(phoneCompanies, phonePrice) {
     var url = ""; //Biến lưu url lấy data
 
     // Thay đổi giá trị biến url theo từng trạng thái của filter
-    if (phoneCompanies.indexOf("Tất cả") != -1 && phonePrice.indexOf("Tất cả") != -1) { 
+    if (phoneCompanies.indexOf("Tất cả") !== -1 && phonePrice.indexOf("Tất cả") !== -1) { 
         url = "";
-    } else if (phoneCompanies.indexOf("Tất cả") != -1 && phonePrice.indexOf("Tất cả") == -1) {
+    } else if (phoneCompanies.indexOf("Tất cả") !== -1 && phonePrice.indexOf("Tất cả") === -1) {
         if (phonePrice.length >= 1) {
             url = "?gia=" + phonePrice[0];
             for (var i = 1; i < phonePrice.length; i++) {
                 url += "," + phonePrice[i];
             }
         }
-    } else if (phoneCompanies.indexOf("Tất cả") == -1 && phonePrice.indexOf("Tất cả") != -1) {
+    } else if (phoneCompanies.indexOf("Tất cả") === -1 && phonePrice.indexOf("Tất cả") !== -1) {
         if (phoneCompanies.length >= 1) {
             url = "?hang=" + phoneCompanies[0];
             for (var i = 1; i < phoneCompanies.length; i++) {
@@ -61,16 +61,16 @@ function getDataFromAccessoriesFilter(accessoriesType, accessoriesPrice) {
     var url = ""; //Biến lưu url lấy data
 
     // Thay đổi giá trị biến url theo từng trạng thái của filter
-    if (accessoriesType.indexOf("Tất cả") != -1 && accessoriesPrice.indexOf("Tất cả") != -1) {
+    if (accessoriesType.indexOf("Tất cả") !== -1 && accessoriesPrice.indexOf("Tất cả") !== -1) {
         url = "";
-    } else if (accessoriesType.indexOf("Tất cả") != -1 && accessoriesPrice.indexOf("Tất cả") == -1) {
+    } else if (accessoriesType.indexOf("Tất cả") !== -1 && accessoriesPrice.indexOf("Tất cả") === -1) {
         if (accessoriesPrice.length >= 1) {
             url = "?gia=" + accessoriesPrice[0];
             for (var i = 1; i < accessoriesPrice.length; i++) {
                 url += "," + accessoriesPrice[i];
             }
         }
-    } else if (accessoriesType.indexOf("Tất cả") == -1 && accessoriesPrice.indexOf("Tất cả") != -1) {
+    } else if (accessoriesType.indexOf("Tất cả") === -1 && accessoriesPrice.indexOf("Tất cả") !== -1) {
         if (accessoriesType.length >= 1) {
             url = "?loai=" + accessoriesType[0];
             for (var i = 1; i < accessoriesType.length; i++) {
@@ -124,7 +124,7 @@ class AccessoriesFilter extends React.Component {
 
     /*Xử lý khi click vào nút + - trong bộ lọc phụ kiện theo hãng*/
     clickTypeChoosenButton = () => {
-        if (this.state.typeDisplay == true) {
+        if (this.state.typeDisplay === true) {
             this.setState({
                 typeDisplay: false,
                 typeChoosenDisplay: { display: "none" },
@@ -141,7 +141,7 @@ class AccessoriesFilter extends React.Component {
 
     /*Xử lý khi click vào nút + - trong bộ lọc phụ kiện theo giá*/
     clickPriceChoosenButton = () => {
-        if (this.state.priceDisplay == true) {
+        if (this.state.priceDisplay === true) {
             this.setState({
                 priceDisplay: false,
                 priceChoosenDisplay: { display: "none" },
@@ -293,7 +293,7 @@ class PhoneFilter extends React.Component {
 
     /*Xử lý khi click vào nút + - trong bộ lọc điện thoại theo hãng*/
     clickTypeChoosenButton = () => {
-        if (this.state.typeDisplay == true) {
+        if (this.state.typeDisplay === true) {
             this.setState({
                 typeDisplay: false,
                 typeChoosenDisplay: { display: "none" },
@@ -310,7 +310,7 @@ class PhoneFilter extends React.Component {
 
     /*Xử lý khi click vào nút + - trong bộ lọc điện thoại theo giá*/
     clickPriceChoosenButton = () => {
-        if (this.state.priceDisplay == true) {
+        if (this.state.priceDisplay === true) {
             this.setState({
                 priceDisplay: false,
                 priceChoosenDisplay: { display: "none" },
@@ -466,19 +466,19 @@ class Filter extends React.Component {
     constructor(props) {
         super(props);
 
-        if (searchingResult.props.match.params.type == "dien-thoai") {
+        if (searchingResult.props.match.params.type === "dien-thoai") {
             this.state = {
                 filterState: 1,
                 phoneButtonStyle: { backgroundColor: "white", color: "#05a90c", fontWeight: "bold", outline: "0", padding: "10px 5px" },
                 accessoriesButtonStyle: { outline: "0", color: "black", padding: "10px 5px" }
             };
-        } else if (searchingResult.props.match.params.type == "phu-kien") {
+        } else if (searchingResult.props.match.params.type === "phu-kien") {
             this.state = {
                 filterState: 2,
                 phoneButtonStyle: { outline: "0", color: "black", padding: "10px 5px" },
                 accessoriesButtonStyle: { backgroundColor: "white", color: "#05a90c", fontWeight: "bold", outline: "0", padding: "10px 5px" }
             };
-        } else if (searchingResult.props.match.params.type == "searching") {
+        } else if (searchingResult.props.match.params.type === "searching") {
             this.state = {
                 filterState: 1,
                 phoneButtonStyle: { backgroundColor: "white", color: "#05a90c", fontWeight: "bold", outline: "0", padding: "10px 5px" },
@@ -538,7 +538,7 @@ class Filter extends React.Component {
                     </div>
 
                     {
-                        this.state.filterState == 1 ?
+                        this.state.filterState === 1 ?
                             <PhoneFilter /> : <AccessoriesFilter />
                     }
 
@@ -565,7 +565,7 @@ class PhoneProducts extends React.Component {
 
     /*Xử lý sự kiện khi thay đổi thuộc tính lọc theo giá tiền*/
     changePriceSorting = (event) => {
-        if (event.target.value == "Cao đến thấp") {
+        if (event.target.value === "Cao đến thấp") {
             var flagResult = searchingResult.state.productsResult;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -579,7 +579,7 @@ class PhoneProducts extends React.Component {
             searchingResult.setState({
                 productsResult: flagResult
             });
-        } else if (event.target.value == "Thấp đến cao") {
+        } else if (event.target.value === "Thấp đến cao") {
             var flagResult = searchingResult.state.productsResult;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -621,7 +621,7 @@ class PhoneProducts extends React.Component {
 
                     <div className="col-xs-12">
                         {
-                            searchingResult.state.productsResult.length == 0 ?
+                            searchingResult.state.productsResult.length === 0 ?
                                 <NotFound /> :
                                 searchingResult.state.productsResult.map(function (note, index) {
                                     return (
@@ -666,7 +666,7 @@ class AccessoriesProducts extends React.Component {
 
     /*Xử lý sự kiện khi thay đổi thuộc tính về sắp xếp theo giá*/
     changePriceSorting = (event) => {
-        if (event.target.value == "Cao đến thấp") {
+        if (event.target.value === "Cao đến thấp") {
             var flagResult = searchingResult.state.productsResult;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -680,7 +680,7 @@ class AccessoriesProducts extends React.Component {
             searchingResult.setState({
                 productsResult: flagResult
             });
-        } else if (event.target.value == "Thấp đến cao") {
+        } else if (event.target.value === "Thấp đến cao") {
             var flagResult = searchingResult.state.productsResult;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -722,7 +722,7 @@ class AccessoriesProducts extends React.Component {
 
                     <div className="col-xs-12">
                         {
-                            searchingResult.state.productsResult.length == 0 ?
+                            searchingResult.state.productsResult.length === 0 ?
                                 <NotFound /> :
                                 searchingResult.state.productsResult.map(function (note, index) {
                                     return (
@@ -767,7 +767,7 @@ class SearchingProducts extends React.Component {
 
     /*Xử lý sự kiện khi thay đổi thuộc tính lọc theo giá tiền*/
     changePriceSorting = (event) => {
-        if (event.target.value == "Cao đến thấp") {
+        if (event.target.value === "Cao đến thấp") {
             var flagResult = searchingResult.state.productsResult;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -781,7 +781,7 @@ class SearchingProducts extends React.Component {
             searchingResult.setState({
                 productsResult: flagResult
             });
-        } else if (event.target.value == "Thấp đến cao") {
+        } else if (event.target.value === "Thấp đến cao") {
             var flagResult = searchingResult.state.productsResult;
             for (var i = 0; i < flagResult.length; i++) {
                 for (var j = i + 1; j < flagResult.length; j++) {
@@ -823,7 +823,7 @@ class SearchingProducts extends React.Component {
 
                     <div className="col-xs-12">
                         {
-                            searchingResult.state.productsResult.length == 0 ?
+                            searchingResult.state.productsResult.length === 0 ?
                                 <NotFound /> :
                                 searchingResult.state.productsResult.map(function (note, index) {
                                     return (
@@ -870,11 +870,11 @@ class SearchingResult extends React.Component {
             <div className="container searching-result">
                 <Filter />
                 {
-                    this.props.match.params.type == "phu-kien" ?
+                    this.props.match.params.type === "phu-kien" ?
                         <AccessoriesProducts /> :
-                        this.props.match.params.type == "dien-thoai" ?
+                        this.props.match.params.type === "dien-thoai" ?
                             <PhoneProducts /> :
-                            this.props.match.params.type == "searching" ?
+                            this.props.match.params.type === "searching" ?
                                 <SearchingProducts /> :
                                 <NotFound />
                 }

@@ -14,7 +14,7 @@ import LogInSignInForm from './logIn.js';
 import Accessories from './accessories.js';
 import Home from './home.js';
 
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
 function App() {

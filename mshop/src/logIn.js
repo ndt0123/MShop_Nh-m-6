@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -17,19 +19,19 @@ class LogIn extends React.Component {
     // Dừng sự kiện submit và hiển thị thông báo khi một trường nào đó chưa được nhập
     // Gán các giá trị error state
     onClickSubmitBtn = (event) => {
-        if (this.state.password.trim() == "" && this.state.username.trim() == "") {
+        if (this.state.password.trim() === "" && this.state.username.trim() === "") {
             event.preventDefault();
             this.setState({
                 errorUsername: "Bạn cần nhập tên đăng nhập",
                 errorPassword: "Bạn cần nhập mật khẩu"
             });
-        } else if (this.state.password.trim() == "" && this.state.username.trim() != "") {
+        } else if (this.state.password.trim() === "" && this.state.username.trim() !== "") {
             event.preventDefault();
             this.setState({
                 errorUsername: "",
                 errorPassword: "Bạn cần nhập mật khẩu"
             });
-        } else if (this.state.password.trim() != "" && this.state.username.trim() == "") {
+        } else if (this.state.password.trim() !== "" && this.state.username.trim() === "") {
             event.preventDefault();
             this.setState({
                 errorUsername: "Bạn cần nhập tên đăng nhập",
@@ -37,7 +39,7 @@ class LogIn extends React.Component {
             });
         }
 
-        if (this.state.password.trim() != "" && this.state.username.trim() != "") {
+        if (this.state.password.trim() !== "" && this.state.username.trim() !== "") {
             event.preventDefault();
             axios.post('/tai-khoan/dang-nhap', { username_logIn: this.state.username, password_logIn: this.state.password }).then(result => {
                 if (typeof result.data.error != "undefined") {
@@ -62,6 +64,32 @@ class LogIn extends React.Component {
     changePassword = (event) => {
         this.setState({
             password: event.target.value
+        });
+    }
+
+    responseFacebook(response) {
+        console.log(response);
+    }
+    responseGoogle(response) {
+        console.log(response)
+    }
+    loginbyfb(response) {
+        axios.post('/tai-khoan/dang-nhap/fb', { user_name: response.name}).then(result => {
+            if (typeof result.data.error !== "undefined") {
+                alert(result.data.error);
+            } else {
+                window.location = "http://localhost:3000/";
+            }
+        });
+    }
+
+    loginbygg(response) {
+        axios.post('/tai-khoan/dang-nhap/gg', { user_name: response.profileObj.name, user_email: response.profileObj.email }).then(result => {
+            if (typeof result.data.error !== "undefined") {
+                alert(result.data.error);
+            } else {
+                window.location = "http://localhost:3000/";
+            }
         });
     }
 
@@ -96,17 +124,30 @@ class LogIn extends React.Component {
                 </div>
 
                 <div className="logIn-with-fb-gg">
-                    <div style={{ width: "144px", margin: "auto" }}>
-                        <Link to="/tai-khoan/facebook">
-                            <div className="fb" title="Facebook">
-                                <span className="fa fa-facebook"></span>
-                            </div>
+                    <div>
+                        <Link to="">
+                            <FacebookLogin
+                                appId="1220122458197880"
+                                fields="name,email,picture"
+                                scope="public_profile"
+                                callback={this.loginbyfb}
+                                cssClass="btnFacebook"
+                                icon="fa fa-facebook"
+                                textButton="&nbsp;&nbsp;Facebook"
+                            />
                         </Link>
 
-                        <Link to="/tai-khoan/google">
-                            <div className="gg" title="Google">
-                                <span className="fa fa-google"></span>
-                            </div>
+                        <Link to="">
+                            <GoogleLogin
+                                clientId="502877853814-nokv9s5ok8plcjtodojvu9ktgeugepom.apps.googleusercontent.com"
+                                
+                                render={renderProps => (
+                                    <button onClick={renderProps.onClick} className="btnGoogle"><i className="fa fa-google"></i>&nbsp;&nbsp;Google</button>
+                                  )}
+                                onSuccess={this.loginbygg}
+                                onFailure={this.responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
                         </Link>
                     </div>
                 </div>
@@ -132,7 +173,7 @@ class SignIn extends React.Component {
 
     onClickSubmitBtn = (event) => {
         var canSubmit = true;
-        if (this.state.username.trim() == "") {
+        if (this.state.username.trim() === "") {
             canSubmit = false;
             this.setState({
                 errorUsername: "Bạn cần nhập tên đăng nhập"
@@ -142,21 +183,21 @@ class SignIn extends React.Component {
                 errorUsername: ""
             })
         }
-        if (this.state.password == "") {
+        if (this.state.password === "") {
             canSubmit = false;
             this.setState({
                 errorPassword: "Bạn cần nhập mật khẩu",
                 errorRePassword: ""
             })
-        } else if (this.state.password != "") {
-            if (this.state.rePassword == "") {
+        } else if (this.state.password !== "") {
+            if (this.state.rePassword === "") {
                 canSubmit = false;
                 this.setState({
                     errorPassword: "",
                     errorRePassword: "Bạn cần nhập lại mật khẩu"
                 })
-            } else if (this.state.rePassword != "") {
-                if (this.state.rePassword != this.state.password) {
+            } else if (this.state.rePassword !== "") {
+                if (this.state.rePassword !== this.state.password) {
                     canSubmit = false;
                     this.setState({
                         errorPassword: "",
@@ -243,12 +284,12 @@ class LogInSignInForm extends React.Component {
         return (
             <div className="box-logIn-signIn">
                 {
-                    this.props.match.params.action == "dang-nhap" ?
+                    this.props.match.params.action === "dang-nhap" ?
                         <LogIn /> : ''
                     
                 }
                 {
-                    this.props.match.params.action == "dang-ky" ?
+                    this.props.match.params.action === "dang-ky" ?
                         <SignIn /> : ''
                 }
             </div>

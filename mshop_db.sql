@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 16, 2019 lúc 05:39 PM
+-- Thời gian đã tạo: Th12 16, 2019 lúc 05:31 PM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.3.9
 
@@ -436,7 +436,19 @@ INSERT INTO `hinhanhdienthoai` (`MaDT`, `DuongDan`) VALUES
 (28, '../images/phones/637060441292308282_xiaomi-redmi-note-8-pro-den-2.png.jpeg'),
 (28, '../images/phones/637060441290718374_xiaomi-redmi-note-8-pro-den-3.png.jpeg'),
 (28, '../images/phones/637060465257853242_xiaomi-redmi-note-8-pro-den-4.png.jpeg'),
-(28, '../images/phones/637060465256933289_xiaomi-redmi-note-8-pro-den-5.png.jpeg');
+(28, '../images/phones/637060465256933289_xiaomi-redmi-note-8-pro-den-5.png.jpeg'),
+(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-add-600x600.jpg'),
+(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-1-1-fix3.jpg'),
+(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-3-1-fix2.jpg'),
+(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-2-1.jpg'),
+(3, '../images/phones/pin-sac-du-phong-10000mah-xmobile-gram-4-dull-dog-xanh-la-4-1.jpg'),
+(9, '../images/phones/cap-micro-1m-esaver-ds118br-tb-avatar-1-fix-600x600.jpg'),
+(9, '../images/phones/cap-micro-usb-1m-esaver-ds118-tb-xanh-duong-1-1.jpg'),
+(18, '../images/phones/tai-nghe-ep-awei-q7ni-1-2-600x600.jpg'),
+(18, '../images/phones/tai-nghe-ep-awei-q7ni9.jpg'),
+(18, '../images/phones/tai-nghe-ep-awei-q7ni8.jpg'),
+(18, '../images/phones/tai-nghe-ep-awei-q7ni2.jpg'),
+(18, '../images/phones/tai-nghe-ep-awei-q7ni5.jpg');
 
 -- --------------------------------------------------------
 

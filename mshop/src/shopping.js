@@ -327,7 +327,7 @@ class PaymentShoppingCart extends React.Component {
                                             }}><span className="fa fa-minus"></span></div>
                                             <div className="float-left" id="prd-amount" style={{ borderLeft: "0px", borderRight: "0px", width: "36px", textAlign: "center" }}>{note.SoLuong}</div>
                                             <div className="float-left" id={"plus_" + index} style={{ cursor: "pointer", color: "#288ad6" }} onClick={() => {
-                                                if (note.LoaiSanPham == "Điện thoại") {
+                                                if (note.LoaiSanPham === "Điện thoại") {
                                                     axios.get('/mua-hang/dien-thoai?id=' + note.MaSanPham).then(result => {
                                                         if (typeof result.data.error == "undefined") {
                                                             if (result.data.detail) {
@@ -352,7 +352,7 @@ class PaymentShoppingCart extends React.Component {
                                                             alert("Đã xảy ra lỗi");
                                                         }
                                                     });
-                                                } else if (note.LoaiSanPham == "Phụ kiện") {
+                                                } else if (note.LoaiSanPham === "Phụ kiện") {
                                                     axios.get('/mua-hang/phu-kien?id=' + note.MaSanPham).then(result => {
                                                         if (typeof result.data.error == "undefined") {
                                                             if (result.data.detail) {
@@ -383,7 +383,7 @@ class PaymentShoppingCart extends React.Component {
                                         <div className="float-right color" style={{ padding: "0px", margin: "1px 0px" }}>
                                             <p style={{ color: "red", cursor: "pointer" }} title="Xóa khỏi giỏ hàng" onClick={() => {
                                                 var mess = window.confirm("Bạn có chăc muốn xóa sản phẩm khỏi giỏ hàng không?");
-                                                if (mess == true) {
+                                                if (mess === true) {
                                                     axios.get('/gio-hang/xoa?id=' + note.MaGioHang).then(result => { })
                                                     axios.get('/mua-hang/gio-hang').then(result => {
                                                         paymentShoppingCart.setState({
@@ -562,7 +562,7 @@ class Shopping extends React.Component {
         var cityAddress = document.getElementById("city-add").textContent;
         var email = document.getElementById("email-info").value;
 
-        if (nameInfo.trim() == "") {
+        if (nameInfo.trim() === "") {
             canSubmit = false;
             this.setState({
                 errNameInfo: "Quý khách cần điền họ tên"
@@ -572,7 +572,7 @@ class Shopping extends React.Component {
                 errNameInfo: ""
             })
         }
-        if (phoneNumberInfo.trim() == "") {
+        if (phoneNumberInfo.trim() === "") {
             canSubmit = false;
             this.setState({
                 errPhoneNumber: "Quý khách cần điền số điện thoại"
@@ -582,7 +582,7 @@ class Shopping extends React.Component {
                 errPhoneNumber: ""
             })
         }
-        if (districtAddress.trim() == "Chọn quận/huyện") {
+        if (districtAddress.trim() === "Chọn quận/huyện") {
             canSubmit = false;
             this.setState({
                 errDistrictAddress: "Quý khách vui lòng chọn quận/huyện"
@@ -592,7 +592,7 @@ class Shopping extends React.Component {
                 errDistrictAddress: ""
             })
         }
-        if (homeNumberInfo.trim() == "") {
+        if (homeNumberInfo.trim() === "") {
             canSubmit = false;
             this.setState({
                 errHomeNumber: "Quý khách vui lòng nhập số nhà, tên đường, phường/xã"
@@ -607,7 +607,7 @@ class Shopping extends React.Component {
             if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined" && typeof result.data.idAccount == "undefined") {
                 canSubmit = false;
                 var mess = window.confirm("Bạn cần đăng nhập để có thể mua hàng");
-                if (mess == true) {
+                if (mess === true) {
                     window.location = "http://localhost:3000/tai-khoan/dang-nhap";
                 }
             } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined" && typeof result.data.idAccount == "undefined") {
@@ -616,7 +616,7 @@ class Shopping extends React.Component {
 
             if (canSubmit) {
                 var pathname = window.location.pathname;
-                if (pathname == "/mua-hang/dien-thoai") {
+                if (pathname === "/mua-hang/dien-thoai") {
                     axios.post('/mua-hang/dien-thoai', { id: paymentPhone.state.detail.id, account: result.data.account, so_luong: paymentPhone.state.productsNumber, dia_chi: homeNumberInfo + ', ' + districtAddress + ', ' + cityAddress, ho_ten: nameInfo, sdt: phoneNumberInfo, email: email }).then(result1 => {
                         if (result1.data.errorQuantity) {
                             alert(result1.data.errorQuantity);
@@ -625,7 +625,7 @@ class Shopping extends React.Component {
                             window.location = "http://localhost:3000/";
                         }
                     })
-                } else if (pathname == "/mua-hang/phu-kien") {
+                } else if (pathname === "/mua-hang/phu-kien") {
                     axios.post('/mua-hang/phu-kien', { id: paymentAccessories.state.detail.id, account: result.data.account, so_luong: paymentAccessories.state.productsNumber, dia_chi: homeNumberInfo + ', ' + districtAddress + ', ' + cityAddress, ho_ten: nameInfo, sdt: phoneNumberInfo, email: email }).then(result1 => {
                         if (result1.data.errorQuantity) {
                             alert(result1.data.errorQuantity);
@@ -634,7 +634,7 @@ class Shopping extends React.Component {
                             window.location = "http://localhost:3000/";
                         }
                     })
-                } else if (pathname == "/mua-hang/gio-hang") {
+                } else if (pathname === "/mua-hang/gio-hang") {
                     axios.post('/mua-hang/gio-hang', { products: paymentShoppingCart.state.shoppingProducts, account: result.data.account, dia_chi: homeNumberInfo + ', ' + districtAddress + ', ' + cityAddress, ho_ten: nameInfo, sdt: phoneNumberInfo, email: email }).then(result1 => {
                         if (result1.data.errorQuantity) {
                             alert(result1.data.errorQuantity);
@@ -665,7 +665,7 @@ class Shopping extends React.Component {
         return (
             <div> 
                 {
-                    this.state.error == 1 ?
+                    this.state.error === 1 ?
                         <NotFound />
                         :
                         <div className="payment-box container">
