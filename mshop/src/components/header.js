@@ -70,7 +70,7 @@ class Header extends React.Component {
             <nav className="navbar navbar-default box-header">
                 <div className="container header">
                     <Link to="/" className="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                        <img src="../images/demo_logo.png" id="logo" />
+                        <img src="../images/logo.png" id="logo" style={{ width: "200px", height: "44px" }} />
                     </Link>
 
                     <div className="col-lg-2 col-md-3 col-sm-3 col-xs-6" id="shopping-cart-for-small-screen" style={{ top: "50%", transform: "translateY(6px)", paddingLeft: "0px" }}>
