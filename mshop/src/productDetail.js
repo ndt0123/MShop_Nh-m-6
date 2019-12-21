@@ -290,121 +290,296 @@ class PhoneDetail extends React.Component {
                         <NotFound />
                         :
                         <div>
-                            <div className="container prds-detail">
-                                <Title title={this.state.phoneDetail[0].TenDienThoai} />
-
-                                <Images images={this.state.phoneImages} />
-
-                                <div className="col-md-6 col-sm-6 col-xs-12 prds-specification">
-                                    <div className="col-xs-12 prds-price" style={{ fontSize: "22px", border: "none" }}>
-                                        {
-                                            this.state.phoneDetail[0].GiaKhuyenMai == null ?
-                                                <b style={{ color: "red" }} className="float-left">{this.state.phoneDetail[0].GiaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</b> :
-                                                <div>
-                                                    <b style={{ color: "red" }} className="float-left">{this.state.phoneDetail[0].GiaKhuyenMai.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</b>
-                                                    <strike className="float-right">{this.state.phoneDetail[0].GiaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</strike>
-                                                </div>
-                                        }
-
+                            <div id="screen-detail-display" style={{ display: "none"}}>
+                                <div id="box-detail-display">
+                                    <div className="col-xs-12" style={{ borderBottom: "solid 1px #afafaf", margin: "0px 0px 10px 0px" }}>
+                                        <h4 className="float-left">Cấu hình chi tiết</h4>
+                                        <span className="float-right glyphicon glyphicon-remove close-detail-box-btn" onClick={() => {
+                                            document.getElementById("screen-detail-display").style.display = "none";
+                                        }}></span>
                                     </div>
-                                    <div className="col-xs-12">
-                                        <h3>Thông số kỹ thuật</h3>
+                                    <div className="col-xs-12 detail-box">
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Công nghệ màn hình:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].CongNgheManHinh}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Độ phân giải màn hình:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiMH}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Độ rộng màn hình:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoRongMH} inch</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Mặt kính:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].MatKinh}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Độ phân giải camera sau:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiCamSau}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Quay phim camera sau:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].QuayPhimCamSau}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Đèn flash:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DenFlashCamSau}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Nâng cao camera sau:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].NangCaoCamSau}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Độ phân giải camera trước:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiCamTruoc}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Video call:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].VideoCall}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Thông tin camera trước:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ThongTinCamTruoc}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Chip:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].Chipset}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Hệ diều hành:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].HeDieuHanh}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">CPU:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].CPU} GB</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">GPU:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].GPU}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">RAM:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].RAM} GB</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">ROM:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ROM} GB</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Thẻ nhớ ngoài:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].TheNhoNgoai}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Mạng di động:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].MangDIDong}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">SIM:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].SIM}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Wifi:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].WIFI}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">GPS:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].GPS}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Bluetooth:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].Bluetooth}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Kết nối:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].KetNoi}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Jack tai nghe:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].JackTaiNghe}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Kết nối khác:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].KetNoiKhac}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Thiết kế:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ThietKe}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Chất liệu:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ChatLieu}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Kích thước:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].KichThuoc}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Trọng lượng:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].TrongLuong} gam</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Dung lượng pin:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DungLuongPin} mAh</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Loại pin:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].LoaiPin}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Bảo mật:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].BaoMat}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Tính năng đặc biệt:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].TinhNangDacBiet}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Ghi âm:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].GhiAm}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Radio:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].Radio}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Xem phim:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].XemPhim}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Nghe nhạc:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].NgheNhac}</p>
+                                        </div>
+                                        <div className="col-xs-12 display-detail">
+                                            <p className="col-md-4 col-xs-5">Thời điểm phát hành:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ThoiDIemPhatHanh}</p>
+                                        </div>
+                                        
                                     </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Màn hình:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].CongNgheManHinh}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Hệ điều hành:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].HeDieuHanh}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Camera sau:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiCamSau}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Camera trước:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiCamTruoc}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">CPU:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].CPU}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">RAM:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].RAM} GB</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Bộ nhớ trong:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ROM} GB</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Thẻ nhớ:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].TheNhoNgoai}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Thẻ SIM:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].SIM}</p>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <p className="col-md-4 col-xs-5">Dung lượng pin:</p>
-                                        <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DungLuongPin} mAh</p>
-                                    </div>
-                                </div>
-
-                                <div className="col-md-8 col-sm-7 col-xs-12 prds-description">
-                                    <h3 className="col-xs-12">Mô tả sản phẩm</h3>
-                                    <p className="col-xs-12">- {this.state.phoneDetail[0].QuayPhimCamSau}</p>
-                                    <p className="col-xs-12">- {this.state.phoneDetail[0].NangCaoCamSau}</p>
-                                    <p className="col-xs-12">- {this.state.phoneDetail[0].ThongTinCamTruoc}</p>
-                                    <p className="col-xs-12">- {this.state.phoneDetail[0].TinhNangDacBiet}</p>
-
-                                    <Comments commentLevel1={this.state.commentLevel1} commentLevel2={this.state.commentLevel2} />
-                                </div>
-
-                                <div className="col-md-4 col-sm-5 col-xs-12 add-buy-btn">
-                                    <div className="col-xs-12">
-                                        <button type="button" className="btn btn-default col-xs-12 adding-btn" onClick={() => {
-                                            axios.get("/trang-chu").then(result => {
-                                                if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
-                                                    var mess = window.confirm("Bạn cần đăng nhập để có thể thực hiện tác vụ này.");
-                                                    if (mess === true) {
-                                                        window.location = "http://localhost:3000/tai-khoan/dang-nhap";
-                                                    }
-                                                } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
-                                                    var ma_san_pham = this.state.phoneDetail[0].MaDienThoai;
-                                                    var loai_san_pham = "Điện thoại";
-                                                    var account = result.data.account;
-                                                    axios.post("/gio-hang/them", { ma_san_pham, loai_san_pham, account }).then(result1 => {
-                                                        if (result1.data.errorRes) {
-                                                            alert(result1.data.errorRes);
-                                                        } else if (result1.data.successRes) {
-                                                            alert(result1.data.successRes);
-                                                            window.location = "http://localhost:3000/";
-                                                        }
-                                                    })
-                                                }
-                                            });
-                                        }}>THÊM VÀO GIỎ HÀNG</button>
-                                    </div>
-                                    <div className="col-xs-12">
-                                        <button type="button" className="btn btn-default col-xs-12 buying-btn" onClick={() => {
-                                            axios.get("/trang-chu").then(result => {
-                                                if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
-                                                    var mess = window.confirm("Bạn cần đăng nhập để có thể mua hàng.");
-                                                    if (mess === true) {
-                                                        window.location = "http://localhost:3000/tai-khoan/dang-nhap";
-                                                    }
-                                                } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
-                                                    window.location = "/mua-hang/dien-thoai" + window.location.search;
-                                                }
-                                            });
-                                        }}>MUA NGAY</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
+                            <div>
+                                <div className="container prds-detail">
+                                    <Title title={this.state.phoneDetail[0].TenDienThoai} />
 
-                            <RecommendPrds products={this.state.recommendPrds} type="dien-thoai" />
+                                    <Images images={this.state.phoneImages} />
+
+                                    <div className="col-md-6 col-sm-6 col-xs-12 prds-specification">
+                                        <div className="col-xs-12 prds-price" style={{ fontSize: "22px", border: "none" }}>
+                                            {
+                                                this.state.phoneDetail[0].GiaKhuyenMai == null ?
+                                                    <b style={{ color: "red" }} className="float-left">{this.state.phoneDetail[0].GiaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</b> :
+                                                    <div>
+                                                        <b style={{ color: "red" }} className="float-left">{this.state.phoneDetail[0].GiaKhuyenMai.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</b>
+                                                        <strike className="float-right">{this.state.phoneDetail[0].GiaBan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} đ</strike>
+                                                    </div>
+                                            }
+
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <h3>Thông số kỹ thuật</h3>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Màn hình:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].CongNgheManHinh}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Hệ điều hành:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].HeDieuHanh}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Camera sau:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiCamSau}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Camera trước:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DoPhanGiaiCamTruoc}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">CPU:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].CPU}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">RAM:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].RAM} GB</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Bộ nhớ trong:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].ROM} GB</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Thẻ nhớ:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].TheNhoNgoai}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Thẻ SIM:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].SIM}</p>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <p className="col-md-4 col-xs-5">Dung lượng pin:</p>
+                                            <p className="col-md-8 col-xs-7">{this.state.phoneDetail[0].DungLuongPin} mAh</p>
+                                        </div>
+                                        <button className="col-xs-12" style={{ padding: "10px", margin: "20px 0px" }} onClick={() => {
+                                            document.getElementById("screen-detail-display").style.display = "block";
+                                        }}>Xem cấu hình chi tiết</button>
+                                    </div>
+
+                                    <div className="col-md-8 col-sm-7 col-xs-12 prds-description">
+                                        <h3 className="col-xs-12">Mô tả sản phẩm</h3>
+                                        <p className="col-xs-12">- {this.state.phoneDetail[0].QuayPhimCamSau}</p>
+                                        <p className="col-xs-12">- {this.state.phoneDetail[0].NangCaoCamSau}</p>
+                                        <p className="col-xs-12">- {this.state.phoneDetail[0].ThongTinCamTruoc}</p>
+                                        <p className="col-xs-12">- {this.state.phoneDetail[0].TinhNangDacBiet}</p>
+
+                                        <Comments commentLevel1={this.state.commentLevel1} commentLevel2={this.state.commentLevel2} />
+                                    </div>
+
+                                    <div className="col-md-4 col-sm-5 col-xs-12 add-buy-btn">
+                                        <div className="col-xs-12">
+                                            <button type="button" className="btn btn-default col-xs-12 adding-btn" onClick={() => {
+                                                axios.get("/trang-chu").then(result => {
+                                                    if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
+                                                        var mess = window.confirm("Bạn cần đăng nhập để có thể thực hiện tác vụ này.");
+                                                        if (mess === true) {
+                                                            window.location = "http://localhost:3000/tai-khoan/dang-nhap";
+                                                        }
+                                                    } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
+                                                        var ma_san_pham = this.state.phoneDetail[0].MaDienThoai;
+                                                        var loai_san_pham = "Điện thoại";
+                                                        var account = result.data.account;
+                                                        axios.post("/gio-hang/them", { ma_san_pham, loai_san_pham, account }).then(result1 => {
+                                                            if (result1.data.errorRes) {
+                                                                alert(result1.data.errorRes);
+                                                            } else if (result1.data.successRes) {
+                                                                alert(result1.data.successRes);
+                                                                window.location = "http://localhost:3000/";
+                                                            }
+                                                        })
+                                                    }
+                                                });
+                                            }}>THÊM VÀO GIỎ HÀNG</button>
+                                        </div>
+                                        <div className="col-xs-12">
+                                            <button type="button" className="btn btn-default col-xs-12 buying-btn" onClick={() => {
+                                                axios.get("/trang-chu").then(result => {
+                                                    if (typeof result.data.account == "undefined" && typeof result.data.level == "undefined") {
+                                                        var mess = window.confirm("Bạn cần đăng nhập để có thể mua hàng.");
+                                                        if (mess === true) {
+                                                            window.location = "http://localhost:3000/tai-khoan/dang-nhap";
+                                                        }
+                                                    } else if (typeof result.data.account != "undefined" && typeof result.data.level != "undefined") {
+                                                        window.location = "/mua-hang/dien-thoai" + window.location.search;
+                                                    }
+                                                });
+                                            }}>MUA NGAY</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <RecommendPrds products={this.state.recommendPrds} type="dien-thoai" />
+                            </div>
                         </div>
                 }
             </div>

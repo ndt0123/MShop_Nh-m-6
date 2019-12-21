@@ -127,7 +127,7 @@ class LogIn extends React.Component {
                     <div>
                         <Link to="">
                             <FacebookLogin
-                                appId="1220122458197880"
+                                appId="525400434720641"
                                 fields="name,email,picture"
                                 scope="public_profile"
                                 callback={this.loginbyfb}

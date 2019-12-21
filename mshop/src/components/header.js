@@ -81,10 +81,12 @@ class Header extends React.Component {
 		                        </Link>
                                 :
                                 <div>
-                                    <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng" onClick={this.onClickShoppingCartBtn}>Giỏ hàng</Link>
                                     <div className="float-right right-btn" title="Đăng xuất" onClick={this.onClickLogOut} style={{ cursor: "pointer" }}>
                                         {this.state.userName}
                                     </div>
+                                    <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng" onClick={this.onClickShoppingCartBtn}>
+                                        <span className="glyphicon glyphicon-shopping-cart"></span>
+                                    </Link>                                    
                                 </div>
                         }
                     </div>
@@ -104,10 +106,12 @@ class Header extends React.Component {
 		                        </Link>
                                 :
                                 <div>
-                                    <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng" onClick={this.onClickShoppingCartBtn}>Giỏ hàng</Link>
                                     <div className="float-right right-btn" title="Đăng xuất" onClick={this.onClickLogOut} style={{ cursor: "pointer" }}>
                                         {this.state.userName}
                                     </div>
+                                    <Link to="/gio-hang" className="float-right right-btn" title="Giỏ hàng" onClick={this.onClickShoppingCartBtn}>
+                                        <span className="glyphicon glyphicon-shopping-cart"></span>
+                                    </Link>                                    
                                 </div>
                         }
 			        </div>

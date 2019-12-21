@@ -89,15 +89,16 @@ div.more-products-btn button:hover {
 .box-header .header .right-btn {
     text-decoration: none;
     color: white;
-    text-align: center;
     border-radius: 3px;
-    overflow: hidden;
-    width: 100px;
-    padding: 3px;
-    margin: 3px;
-    border: solid 1px white;
+    padding: 3px 10px;
+    margin: 3px 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    border: solid 1px white;
+
+}
+.box-header .header .right-btn:hover {
+    background-color: #3b883e;
 }
 
 .box-header .header {
@@ -640,6 +641,45 @@ div.more-products-btn button:hover {
     color: white;
     font-size: 11px;
 }
+#screen-detail-display {
+    background-color: #000000ad;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    padding: 10px 0px;
+}
+#box-detail-display {
+    background-color: white;
+    border-radius: 3px;
+    width: 600px;
+    margin: auto;
+    height: 100%;
+}
+.detail-box {
+    overflow-y: scroll;
+    height: 100%;
+}
+.detail-box::-webkit-scrollbar {
+    display: none;
+}
+.close-detail-box-btn {
+    padding: 10px 0px;
+    cursor: pointer;
+}
+.display-detail {
+    border-bottom: solid 1px #dedede;
+    padding: 0px;
+}
+.display-detail p:first-child {
+    color: coral;
+}
+.display-detail p {
+    padding: 10px 0px;
+    
+}
 
 
 /* ----- Searching result ----- */
@@ -945,6 +985,15 @@ p.error-input-info {
     /* ----- Thanh toán mua hàng ----- */
     .payment-box {
         width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    /* ---- Chi tiết cấu hình sản phẩm ---- */
+    #detail-display {
+        width: 450px;
     }
 }
 
